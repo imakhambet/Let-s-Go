@@ -84,4 +84,5 @@ public abstract class BaseDao<T> implements GenericDao<T> {
     public boolean exists(Integer id) {
         return id != null && em.find(type, id) != null;
     }
+
 }

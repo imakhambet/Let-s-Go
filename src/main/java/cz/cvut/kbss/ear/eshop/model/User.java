@@ -1,63 +1,34 @@
 package cz.cvut.kbss.ear.eshop.model;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
 
 @Entity
-// We can't name the table User, as it is a reserved table name in some dbs, including Postgres
 @Table(name = "EAR_USER")
 @NamedQueries({
         @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username")
 })
-public class User extends AbstractEntity {
+
+public class User extends AbstractEntity{
 
     @Basic(optional = false)
     @Column(nullable = false)
-    private String firstName;
-
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private String lastName;
-
-    @Basic(optional = false)
-    @Column(nullable = false, unique = true)
-    private String username;
+    private String login;
 
     @Basic(optional = false)
     @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated
     private Role role;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
-    private Cart cart;
-
-    public User() {
-        this.role = Role.GUEST;
+    public String getLogin() {
+        return login;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -68,8 +39,12 @@ public class User extends AbstractEntity {
         this.password = password;
     }
 
-    public void erasePassword() {
-        this.password = null;
+    public void encodePassword(PasswordEncoder encoder){
+        this.password=encoder.encode(password);
+    }
+
+    public void erasePassword(){
+        this.password=null;
     }
 
     public Role getRole() {
@@ -80,22 +55,4 @@ public class User extends AbstractEntity {
         this.role = role;
     }
 
-    public boolean isAdmin() {
-        return role == Role.ADMIN;
-    }
-
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                firstName + " " + lastName +
-                "(" + username + ")}";
-    }
 }
