@@ -48,4 +48,6 @@ public class Customer extends User {
     public void setQuestion(Question question) {
         this.question = question;
     }
+
+
 }

@@ -55,4 +55,6 @@ public class User extends AbstractEntity{
         this.role = role;
     }
 
+
+
 }

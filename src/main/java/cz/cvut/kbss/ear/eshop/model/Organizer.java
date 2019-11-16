@@ -39,4 +39,6 @@ public class Organizer extends User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+
 }

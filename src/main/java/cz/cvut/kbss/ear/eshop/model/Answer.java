@@ -30,4 +30,6 @@ public class Answer extends AbstractEntity {
     public void setOrganizer(Organizer organizer) {
         this.organizer = organizer;
     }
+
+
 }

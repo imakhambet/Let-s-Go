@@ -43,4 +43,20 @@ public class Question extends AbstractEntity{
     public void setOwner(Customer owner) {
         this.owner = owner;
     }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 }
