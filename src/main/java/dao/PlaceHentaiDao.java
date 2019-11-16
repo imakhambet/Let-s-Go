@@ -1,6 +1,7 @@
 package dao;
 
-public class EventCategory {
+public class PlaceHentaiDao {
     public int id;
     public String name;
+    public String address;
 }

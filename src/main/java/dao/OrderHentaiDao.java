@@ -2,7 +2,7 @@ package dao;
 
 import java.util.Date;
 
-public class Order {
+public class OrderHentaiDao {
     public int id;
     public int owner;
     public int eventTicket;

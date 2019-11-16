@@ -1,6 +1,6 @@
 package dao;
 
-public class Organizer {
+public class OrganizerHentaiDao {
     public String email;
     public String CompanyName;
     public String phone;

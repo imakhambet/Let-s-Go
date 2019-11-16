@@ -1,6 +1,6 @@
 package dao;
 
-public class EventTicket {
+public class EventTicketHentaiDao {
     public int id;
     public int event;
     public String name;

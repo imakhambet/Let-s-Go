@@ -2,7 +2,7 @@ package dao;
 
 import java.util.Date;
 
-public class Event {
+public class EventHentaiDao {
     public int id;
     public int category;
     public int organizer;

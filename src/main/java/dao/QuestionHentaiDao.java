@@ -1,6 +1,6 @@
 package dao;
 
-public class Question {
+public class QuestionHentaiDao {
     public int id;
     public int owner;
     public int event;
