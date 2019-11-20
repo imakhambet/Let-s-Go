@@ -1,11 +1,24 @@
 package cz.macha.spring.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name="orders")
 public class Order {
+    public Order() {
+    }
+
+    public Order(Customer customer, EventTicket eventTicket, int quantity, String date) {
+        super();
+        this.customer = customer;
+        this.eventTicket = eventTicket;
+        this.quantity = quantity;
+        this.date = date;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,15 +37,6 @@ public class Order {
     @Column
     private String date;
 
-    public Order() {
-    }
-
-    public Order(Customer customer, EventTicket eventTicket, String name, int quantity, String date) {
-        this.customer = customer;
-        this.eventTicket = eventTicket;
-        this.quantity = quantity;
-        this.date = date;
-    }
 
     public Integer getId() {
         return id;
@@ -42,6 +46,7 @@ public class Order {
         this.id = id;
     }
 
+    @JsonIgnore
     public Customer getCustomer() {
         return customer;
     }
@@ -50,6 +55,7 @@ public class Order {
         this.customer = customer;
     }
 
+    @JsonIgnore
     public EventTicket getEventTicket() {
         return eventTicket;
     }

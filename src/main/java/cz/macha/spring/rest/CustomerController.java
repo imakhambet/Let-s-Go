@@ -20,9 +20,14 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
-    @RequestMapping("/customers/{id}")
-    public Customer getUser(@PathVariable Integer id){
+    @RequestMapping("/customers/id{id}")
+    public Customer getUserById(@PathVariable Integer id){
         return customerService.getCustomer(id);
+    }
+
+    @RequestMapping("/customers/{login}")
+    public Customer getUserByName(@PathVariable String login){
+        return customerService.getCustomerByLogin(login);
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/customers")

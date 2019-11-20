@@ -28,8 +28,13 @@ public class OrderController {
     EventTicketService eventTicketService;
 
     @RequestMapping("/orders")
-    public List<Order> getAllCustomers() {
+    public List<Order> getAllOrders() {
         return orderService.getAllOrders();
+    }
+
+    @RequestMapping("/customers/{id}/orders")
+    public List<Order> getOrdersByCustomer(@PathVariable Integer id){
+        return orderService.getOrdersByCustomer(customerService.getCustomer(id));
     }
 
     @RequestMapping("/customers/{id}/tickets/{ticket}/orders")
@@ -38,6 +43,11 @@ public class OrderController {
         order.setCustomer(customerService.getCustomer(id));
         order.setEventTicket(eventTicketService.getEventTicketById(ticket));
         orderService.addOrders(order);
+    }
+
+    @RequestMapping("/orders/{oid}")
+    public void deleteOrder(@PathVariable Integer oid){
+        orderService.deleteOrders(oid);
     }
 
 }

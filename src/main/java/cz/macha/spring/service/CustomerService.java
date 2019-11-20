@@ -21,6 +21,10 @@ public class CustomerService {
         return customerDao.findOne(id);
     }
 
+    public Customer getCustomerByLogin(String login) {
+        return customerDao.findCustomerByLogin(login);
+    }
+
     public void addCustomer(Customer customer){
         customerDao.save(customer);
     }

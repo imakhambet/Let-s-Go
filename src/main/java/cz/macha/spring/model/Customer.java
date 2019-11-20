@@ -1,6 +1,7 @@
 package cz.macha.spring.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "customers")
@@ -35,6 +36,11 @@ public class Customer {
 
     @Column
     private String name;
+
+    @OneToMany(mappedBy = "customer", cascade = {
+            CascadeType.PERSIST
+    })
+    private List<Order> orders;
 
     public Integer getId() {
         return id;
@@ -82,5 +88,13 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

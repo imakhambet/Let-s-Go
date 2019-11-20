@@ -3,7 +3,9 @@ package cz.macha.spring.model;
 //import cz.macha.spring.model.Event;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "organizers")
@@ -89,5 +91,14 @@ public class Organizer {
 
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public void addEvent(Event event) {
+        Objects.requireNonNull(event);
+        if (events == null) {
+            this.events = new ArrayList<>();
+        }
+        events.add(event);
+
     }
 }

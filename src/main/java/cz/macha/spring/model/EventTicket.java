@@ -28,6 +28,11 @@ public class EventTicket {
     @JoinColumn(name = "event_id")
     private Event event;
 
+    @OneToMany(mappedBy = "eventTicket", cascade = {
+            CascadeType.PERSIST
+    })
+    private List<Order> orders;
+
     @Column
     private String name;
 
@@ -78,6 +83,11 @@ public class EventTicket {
         this.quantity = quantity;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
 
-
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
 }
