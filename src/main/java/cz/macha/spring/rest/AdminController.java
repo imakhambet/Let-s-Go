@@ -14,6 +14,11 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
+    @RequestMapping("/hello")
+    public String getHello(){
+        return "index";
+    }
+
     @RequestMapping("/admins")
     public List<Admin> getAllUsers() {
         return adminService.getAllAdmins();
