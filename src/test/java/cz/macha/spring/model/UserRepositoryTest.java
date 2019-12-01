@@ -1,11 +1,17 @@
 package cz.macha.spring.model;
 
+import cz.macha.spring.repository.EventRepository;
+import cz.macha.spring.repository.PlaceRepository;
 import cz.macha.spring.repository.UserRepository;
+
+import cz.macha.spring.service.EventService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.awt.image.PackedColorModel;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -16,6 +22,8 @@ public class UserRepositoryTest {
 
     @Autowired
     UserRepository userRepository;
+    EventRepository eventRepository;
+    PlaceRepository placeRepository;
 
     @Test
     public void saveAndGetCustomer() {
@@ -50,4 +58,18 @@ public class UserRepositoryTest {
         assertNotNull(userRepository.findAll());
     }
 
+    @Test
+    public void createEvent(){
+        User organizer = new User("makha", "123",
+                "imakhambet@gmail.com");
+        userRepository.save(organizer);
+        Place place = new Place("Kazahstan" , organizer , "NurSulTan");
+        placeRepository.save(place);
+        Event create = new Event(organizer , place , "JoJoClub" , "prosmotr jojo fleks kak v jojo . Tolko v topovych shmotkach" , "kogda umrem" );
+        eventRepository.save(create);
+        assertNotNull(eventRepository.findEventsByPlace(place));
+        EventService eventService = new EventService();
+        eventService.updateEvent(1 , create);
+        assertNotNull(eventService.getEventsByOrganizer(organizer));
+    }
 }
