@@ -2,9 +2,6 @@ package cz.macha.spring.repository;
 
 import cz.macha.spring.model.Event;
 import cz.macha.spring.model.User;
-import cz.macha.spring.repository.CategoryRepository;
-import cz.macha.spring.repository.EventRepository;
-import cz.macha.spring.repository.PlaceRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
