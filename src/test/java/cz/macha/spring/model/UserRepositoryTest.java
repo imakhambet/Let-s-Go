@@ -1,5 +1,6 @@
 package cz.macha.spring.model;
 
+import cz.macha.spring.repository.CategoryRepository;
 import cz.macha.spring.repository.EventRepository;
 import cz.macha.spring.repository.PlaceRepository;
 import cz.macha.spring.repository.UserRepository;
@@ -22,8 +23,13 @@ public class UserRepositoryTest {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
     EventRepository eventRepository;
+    @Autowired
     PlaceRepository placeRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
+
 
     @Test
     public void saveAndGetCustomer() {
@@ -67,9 +73,9 @@ public class UserRepositoryTest {
         placeRepository.save(place);
         Event create = new Event(organizer , place , "JoJoClub" , "prosmotr jojo fleks kak v jojo . Tolko v topovych shmotkach" , "kogda umrem" );
         eventRepository.save(create);
-        assertNotNull(eventRepository.findEventsByPlace(place));
-        EventService eventService = new EventService();
-        eventService.updateEvent(1 , create);
-        assertNotNull(eventService.getEventsByOrganizer(organizer));
+        Category category = new Category( "Hentai" , organizer );
+        categoryRepository.save(category);
+        create.addCategory(category);
+        assertNotNull(categoryRepository.getCategoryByName("Hentai"));
     }
 }
