@@ -1,5 +1,7 @@
 package cz.macha.spring.rest;
 
+import cz.macha.spring.model.Answer;
+import cz.macha.spring.model.Question;
 import cz.macha.spring.model.User;
 import cz.macha.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +43,16 @@ public class UserController {
     public void deleteUser(@PathVariable Integer id){
         userService.deleteUser(id);
     }
+
+    //pouze pro zakazniky
+    @RequestMapping(method = RequestMethod.POST, value = "/users/{cId}/events/{eId}/questions")
+    public void addQuestion(@PathVariable Integer cId, @PathVariable Integer eId, @RequestBody Question question){
+        userService.addQuestion(cId, eId, question);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/users/{oId}/questions/{qId}/answers")
+    public void addAnswer(@PathVariable Integer oId, @PathVariable Integer qId, @RequestBody Answer answer){
+        userService.addAnswer(oId, qId, answer);
+    }
+
 }

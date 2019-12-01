@@ -2,6 +2,8 @@ package cz.macha.spring.model;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "questions")
 public class Question {
 
     public Question() {
