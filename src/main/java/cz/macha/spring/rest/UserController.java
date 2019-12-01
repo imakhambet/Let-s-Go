@@ -67,7 +67,7 @@ public class UserController {
     public void createEvent(@RequestBody Event event,
                          @PathVariable Integer id){
         event.setOrganizer(userService.getUser(id));
-        eventService.addEvent(event);
+        userService.createEvent(event);
     }
 
 }

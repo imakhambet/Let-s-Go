@@ -45,10 +45,6 @@ public class EventService {
         return eventRepository.getEventByName(name);
     }
 
-    public void addEvent(Event event){
-        eventRepository.save(event);
-    }
-
     public void updateEvent(Integer id, Event event){
         Event event1 = eventRepository.findById(id).orElse(null);
         assert event1 != null;
