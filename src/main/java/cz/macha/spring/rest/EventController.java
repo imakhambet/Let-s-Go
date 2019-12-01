@@ -15,7 +15,7 @@ public class EventController {
 
     @Autowired
     private UserService organizerService;
-//    @Autowired
+    //    @Autowired
 //    private CategoryService categoryService;
     @Autowired
     private PlaceService placeService;
@@ -44,37 +44,32 @@ public class EventController {
     }
 
     @RequestMapping("/events")
-    public List<Event> getAllEvents(){
+    public List<Event> getAllEvents() {
         return eventService.getAllEvents();
     }
 
     @RequestMapping("/events/{id}")
-    public Event getEvent(@PathVariable Integer id){
+    public Event getEvent(@PathVariable Integer id) {
         return eventService.getEvent(id);
     }
 
     @RequestMapping("/events/name/{name}")
-    public Event getEventByName(@PathVariable String name){
+    public Event getEventByName(@PathVariable String name) {
         return eventService.getEventByName(name);
     }
 
-    @RequestMapping(method = RequestMethod.POST,
-            value = "/organizers/{id}/places/{place}/events")
-    public void addEvent(@RequestBody Event event,
-                         @PathVariable Integer id,
-                         @PathVariable String place){
-        event.setOrganizer(organizerService.getUser(id));
-        event.setPlace(placeService.getPlaceByName(place));
-        eventService.addEvent(event);
-    }
-
     @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}")
-    public void updateUser(@RequestBody Event event, @PathVariable Integer id){
+    public void updateEvent(@RequestBody Event event, @PathVariable Integer id) {
         eventService.updateEvent(id, event);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/events/{id}")
-    public void deleteUser(@PathVariable Integer id){
+    public void deleteEvent(@PathVariable Integer id) {
         eventService.deleteEvent(id);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/events/{id}/places/{pId}")
+    public void setPlaceForEvent(@PathVariable Integer id, @PathVariable Integer pId) {
+        eventService.setPlace(id, placeService.getPlaceById(pId));
     }
 }

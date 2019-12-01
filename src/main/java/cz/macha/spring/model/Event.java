@@ -12,9 +12,7 @@ public class Event {
     public Event() {
     }
 
-    public Event(User organizer, Place place, String name, String description, String date) {
-        this.organizer = organizer;
-        this.place = place;
+    public Event(String name, String description, String date) {
         this.name = name;
         this.description = description;
         this.date = date;
@@ -68,19 +66,25 @@ public class Event {
     public void setOrganizer(User organizer) {
         this.organizer = organizer;
     }
-//
-//    @JsonIgnore
-//    public Set<Category> getCategory() {
-//        return categories;
-//    }
-//
-//    public void setCategory(Set<Category> category) {
-//        this.categories = category;
-//    }
+
+    @JsonIgnore
+    public Set<Category> getCategory() {
+        return categories;
+    }
+
+    public void setCategory(Set<Category> category) {
+        this.categories = category;
+    }
 
     @JsonIgnore
     public Place getPlace() {
         return place;
+    }
+
+    public String getPlaceName() {
+        if (place != null)
+            return place.getName();
+        return "-";
     }
 
     public void setPlace(Place place) {

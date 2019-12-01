@@ -1,8 +1,11 @@
 package cz.macha.spring.rest;
 
 import cz.macha.spring.model.Answer;
+import cz.macha.spring.model.Event;
 import cz.macha.spring.model.Question;
 import cz.macha.spring.model.User;
+import cz.macha.spring.service.EventService;
+import cz.macha.spring.service.PlaceService;
 import cz.macha.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,10 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private EventService eventService;
+    @Autowired
+    private PlaceService placeService;
 
     @RequestMapping("/users")
     public List<User> getAllUsers() {
@@ -53,6 +60,14 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, value = "/users/{oId}/questions/{qId}/answers")
     public void addAnswer(@PathVariable Integer oId, @PathVariable Integer qId, @RequestBody Answer answer){
         userService.addAnswer(oId, qId, answer);
+    }
+
+    @RequestMapping(method = RequestMethod.POST,
+            value = "/organizers/{id}/events")
+    public void createEvent(@RequestBody Event event,
+                         @PathVariable Integer id){
+        event.setOrganizer(userService.getUser(id));
+        eventService.addEvent(event);
     }
 
 }

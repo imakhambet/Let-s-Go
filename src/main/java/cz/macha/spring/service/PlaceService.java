@@ -20,6 +20,8 @@ public class PlaceService {
     public Place getPlaceByName(String name) {
         return placeRepository.getPlaceByName(name);
     }
+    public Place getPlaceById(Integer id) {
+        return placeRepository.findById(id).orElse(null); }
 
     public void addPlace(Place place){
         placeRepository.save(place);

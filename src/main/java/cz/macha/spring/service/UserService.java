@@ -60,6 +60,11 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+
+    public void createEvent(Event event){
+        eventRepository.save(event);
+    }
+
     //pouze pro role==zakaznik
     public void addQuestion(Integer cId, Integer eId, Question question){
         question.setEvent(eventRepository.findById(eId).orElse(null));

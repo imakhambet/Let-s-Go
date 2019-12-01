@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class EventService {
@@ -58,5 +59,12 @@ public class EventService {
 
     public void deleteEvent(Integer id){
         eventRepository.deleteById(id);
+    }
+
+    public void setPlace(Integer id, Place place){
+        Event event = eventRepository.findById(id).orElse(null);
+        assert event != null;
+        event.setPlace(place);
+        eventRepository.save(event);
     }
 }

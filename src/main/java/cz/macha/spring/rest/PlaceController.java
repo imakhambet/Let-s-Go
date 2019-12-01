@@ -43,4 +43,5 @@ public class PlaceController {
     public void deletePlace(@PathVariable Integer id){
         placeService.deletePlace(id);
     }
+
 }
