@@ -18,8 +18,8 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public List<Order> getOrdersByCustomer(User customer){
-        return orderRepository.findOrdersByCustomer(customer);
+    public List<Order> getOrdersByCustomerOrderByIdDesc(User customer){
+        return orderRepository.findOrdersByCustomerOrderByIdDesc(customer);
     }
 
     public void addOrders(Order order){

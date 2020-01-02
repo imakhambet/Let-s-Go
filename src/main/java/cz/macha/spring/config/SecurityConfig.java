@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/createevent").hasRole("ORGANIZER")
                 .antMatchers("/admin", "/createplace").hasRole("ADMIN")
                 .antMatchers("/").permitAll()
+//                .antMatchers("/buyticket/*").hasRole("USER")
                 .and()
                 .logout().logoutSuccessUrl("/login")
                 .and().formLogin();

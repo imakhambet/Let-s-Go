@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
-public class HelloController {
+public class MainController {
 
     @Autowired
     EventService eventService;
@@ -31,6 +31,9 @@ public class HelloController {
             if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
                 model.put("role", "<h3>Admin mode</h3>");
                 model.put("link", "<a href=\"/admin\">Go to admin page </a>\n");
+            }
+            if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))){
+                model.put("link", "<a href=\"/myorders\">My orders</a>\n");
             }
         }else{
             model.put("login", "<a href=\"/login\">Login</a>\n");
@@ -69,5 +72,10 @@ public class HelloController {
     @GetMapping("/registration")
     public String registration() {
         return "registration";
+    }
+
+    @GetMapping("/succesorder")
+    public String succesorder() {
+        return "user/succesorder";
     }
 }

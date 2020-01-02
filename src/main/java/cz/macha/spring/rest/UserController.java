@@ -97,7 +97,6 @@ public class UserController {
                                     @RequestParam String description,
                                     @RequestParam String date,
                                     @RequestParam String place, Authentication authentication){
-        System.out.println(name);
         Event event = new Event(name, description, date);
         event.setOrganizer(userService.getUserByLogin(authentication.getName()));
         event.setPlace(placeService.getPlaceByName(place));

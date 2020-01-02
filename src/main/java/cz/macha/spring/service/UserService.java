@@ -4,6 +4,7 @@ import cz.macha.spring.dao.UserDao;
 import cz.macha.spring.model.*;
 import cz.macha.spring.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;

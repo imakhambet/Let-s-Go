@@ -45,9 +45,15 @@ public class EventController {
                         equals(eventService.getEvent(id).getOrganizer()))
                     model.put("createticket", "<a href=\"/createticket/"+id+"\">Add ticket</a>");
             }
+            if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))){
+                model.put("userticket", "<label for=\"quantity\">Quantity</label>\n" +
+                        "<input type=\"number\" id=\"quantity\" name=\"quantity\">" +
+                        "<button type=\"submit\">Buy ticket</button>\n");
+            }
         }else{
             model.put("login", "<a href=\"/login\">Login</a>\n");
             model.put("registration", "<a href=\"/registration\">Registration</a>\n");
+            model.put("userticket", "<p style=\"color: red\">Please login as User</p>");
         }
         model.put("event", eventService.getEvent(id));
         model.put("tickets", eventService.getEvent(id).getEventTickets());

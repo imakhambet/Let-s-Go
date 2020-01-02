@@ -11,12 +11,11 @@ public class Order {
     public Order() {
     }
 
-    public Order(User customer, EventTicket eventTicket, int quantity, String date) {
+    public Order(User customer, EventTicket eventTicket, int quantity) {
         super();
         this.customer = customer;
         this.eventTicket = eventTicket;
         this.quantity = quantity;
-        this.date = date;
     }
 
     @Id
@@ -35,8 +34,7 @@ public class Order {
     private int quantity;
 
     @Column
-    private String date;
-
+    private float totalPrice;
 
     public Integer getId() {
         return id;
@@ -72,11 +70,11 @@ public class Order {
         this.quantity = quantity;
     }
 
-    public String getDate() {
-        return date;
+    public float getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

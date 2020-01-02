@@ -6,6 +6,7 @@ import cz.macha.spring.repository.EventRepository;
 import cz.macha.spring.model.Event;
 import cz.macha.spring.model.Place;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class EventService {
     private EventRepository eventRepository;
 
     public List<Event> getAllEvents(){
-        return eventRepository.findAll();
+        return eventRepository.findAll(new Sort(Sort.Direction.DESC, "id"));
     }
 
     public List <Event> getEventsByOrganizer(User organizer) {

@@ -36,8 +36,12 @@
     {{#tickets}}
         <div style="border: 1px solid black;
      width: 200px; margin: 20px 0 0 20px;">
-            <p style="font-weight: 900">Type: {{name}}</p>
-            <p>Price: {{price}}</p>
+            <form method="post" class="buyTicket" style="display: block" action="/buyticket/{{id}}">
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                <p style="font-weight: 900">Type: {{name}}</p>
+                <p>Price: {{price}}</p>
+                {{#userticket}}{{{.}}}{{/userticket}}
+            </form>
         </div>
     {{/tickets}}
 </div>
