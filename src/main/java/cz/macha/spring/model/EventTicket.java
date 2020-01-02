@@ -1,7 +1,5 @@
 package cz.macha.spring.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,9 +10,7 @@ public class EventTicket {
     public EventTicket() {
     }
 
-    public EventTicket(Event event, String name, float price, int quantity) {
-        super();
-        this.event = event;
+    public EventTicket(String name, float price, int quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -51,7 +47,6 @@ public class EventTicket {
         this.id = id;
     }
 
-    @JsonIgnore
     public Event getEvent() {
         return event;
     }
@@ -84,7 +79,6 @@ public class EventTicket {
         this.quantity = quantity;
     }
 
-    @JsonIgnore
     public List<Order> getOrders() {
         return orders;
     }

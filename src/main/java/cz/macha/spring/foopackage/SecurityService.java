@@ -1,6 +1,6 @@
 //package cz.macha.spring.foopackage.security;
 //
-//import cz.macha.spring.service.UserDetailsServiceImpl;
+//import cz.macha.spring.service.security.SecurityService.UserDetailsServiceImpl;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 //import org.springframework.beans.factory.annotation.Autowired;

@@ -2,14 +2,13 @@ package cz.macha.spring.service;
 
 import cz.macha.spring.dao.UserDao;
 import cz.macha.spring.model.*;
-import cz.macha.spring.repository.AnswerRepository;
-import cz.macha.spring.repository.EventRepository;
-import cz.macha.spring.repository.QuestionRepository;
-import cz.macha.spring.repository.UserRepository;
+import cz.macha.spring.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -24,11 +23,6 @@ public class UserService {
     @Autowired
     AnswerRepository answerRepository;
 
-//    @Autowired
-//    RoleRepository roleRepository;
-//
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
@@ -43,6 +37,9 @@ public class UserService {
     }
 
     public void addUser(User user){
+//        Set<Role> roles = new HashSet<>();
+//        roles.add(roleRepository.getOne(1));
+//        user.setRoles(roles);
         userRepository.save(user);
     }
 

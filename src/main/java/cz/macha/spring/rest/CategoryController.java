@@ -5,10 +5,10 @@ import cz.macha.spring.model.Event;
 import cz.macha.spring.service.CategoryService;
 import cz.macha.spring.service.EventService;
 import cz.macha.spring.service.UserService;
-import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -27,10 +27,15 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/admins/{id}/categories")
-    public void addCategory(@RequestBody Category category, @PathVariable Integer id){
-        category.setCreator(adminService.getUser(id));
+
+    @PostMapping("/addcategory")
+    public ModelAndView addCategory(@RequestParam String name,
+                                 Authentication auth){
+        Category category = new Category(name, adminService.getUserByLogin(auth.getName()));
         categoryService.addCategory(category);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/admin");
+        return modelAndView;
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/categories/{id}")

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Hello World!</title>
+</head>
+<body>
+<h1>Let's GO</h1>
+<h2>Add new place</h2>
+
+<form method="post" class="addCategory" style="display: block" action="/addcategory">
+    <label for="categoryname">Category name: </label>
+    <input type="text" name="name" id="categoryname">
+
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+    <button type="submit">Add</button>
+</form>
+
+</body>
+</html>

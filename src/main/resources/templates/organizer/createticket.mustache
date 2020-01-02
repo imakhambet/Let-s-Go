@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Hello World!</title>
+</head>
+<body>
+<h1>Let's GO</h1>
+<h2>Add new ticket for event</h2>
+
+<form method="post" class="addTicket" style="display: block" action="/event/{{#id}}{{.}}{{/id}}/addticket">
+    <label for="ticketname">Name: </label>
+    <input type="text" name="name" id="ticketname">
+
+    <label for="price">Price: </label>
+    <input type="number" name="price" id="price">
+
+    <label for="quantity">Quantity: </label>
+    <input type="number" name="quantity" id="quantity">
+
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+    <button type="submit">Add</button>
+</form>
+
+</body>
+</html>

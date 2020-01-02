@@ -5,7 +5,9 @@ import cz.macha.spring.model.Place;
 import cz.macha.spring.service.PlaceService;
 import cz.macha.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -28,10 +30,15 @@ public class PlaceController {
         return placeService.getPlaceByName(name);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/admins/{id}/places")
-    public void addPlace(@RequestBody Place place, @PathVariable Integer id){
-        place.setCreator(adminService.getUser(id));
+    @PostMapping("/addplace")
+    public ModelAndView addPlace(@RequestParam String name,
+                                 @RequestParam String address,
+                                 Authentication auth){
+        Place place = new Place(name, adminService.getUserByLogin(auth.getName()), address);
         placeService.addPlace(place);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/admin");
+        return modelAndView;
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/places/{id}")

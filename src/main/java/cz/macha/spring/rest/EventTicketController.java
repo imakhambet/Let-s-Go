@@ -7,6 +7,7 @@ import cz.macha.spring.service.EventService;
 import cz.macha.spring.service.EventTicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -18,15 +19,21 @@ public class EventTicketController {
     @Autowired
     EventService eventService;
 
-    @RequestMapping("/events/{id}/tickets")
+    @RequestMapping("/event/{id}/tickets")
     public List<EventTicket> getEventTicketsByEvent(@PathVariable Integer id) {
         return eventTicketService.getEventTicketsByEvent(eventService.getEvent(id));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/events/{id}/tickets")
-    public void addEventTicket(@RequestBody EventTicket eventTicket, @PathVariable Integer id){
+    @PostMapping("/event/{id}/addticket")
+    public ModelAndView addEventTicket(@RequestParam String name,
+                                       @RequestParam float price,
+                                       @RequestParam int quantity, @PathVariable Integer id){
+        EventTicket eventTicket = new EventTicket(name, price, quantity);
         eventTicket.setEvent(eventService.getEvent(id));
         eventTicketService.addEventTicket(eventTicket);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/event/"+ id);
+        return modelAndView;
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/tickets/{id}")

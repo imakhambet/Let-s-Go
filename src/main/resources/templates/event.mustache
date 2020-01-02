@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Hello World!</title>
+</head>
+<body>
+<h1><a href="/">Let's GO</a></h1>
+
+<p>{{#name}} {{{.}}} {{/name}}</p>
+<p>{{#role}} {{{.}}} {{/role}}</p>
+
+<p>{{#logout}} {{{.}}} {{/logout}}</p>
+<p>{{#login}} {{{.}}} {{/login}}</p>
+<p>{{#registration}} {{{.}}} {{/registration}}</p>
+
+<h2>Event</h2>
+
+<div style="display: block; width: 100%; margin-top: 30px;">
+{{#event}}
+        <div style="border-top: 2px solid black; border-bottom: 2px solid black">
+            <p style="font-weight: 900">{{name}}</p>
+            <p>Place: {{place.name}}</p>
+            <p>Description: {{description}}</p>
+            <p>Date: {{date}}</p>
+            <p>Organizer: {{organizer.login}}</p>
+        </div>
+    </div>
+{{/event}}
+
+
+<div style="display: block; width: 60%; margin-top: 30px;">
+
+    <h3>Tickets</h3>
+    <p> {{#createticket}}{{{.}}}{{/createticket}}</p>
+
+    {{#tickets}}
+        <div style="border: 1px solid black;
+     width: 200px; margin: 20px 0 0 20px;">
+            <p style="font-weight: 900">Type: {{name}}</p>
+            <p>Price: {{price}}</p>
+        </div>
+    {{/tickets}}
+</div>
+</body>
+</html>
