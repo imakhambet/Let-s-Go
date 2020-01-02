@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -21,8 +22,14 @@ public class PlaceController {
     PlaceService placeService;
 
     @RequestMapping("/places")
-    public List<Place> getAllPlaces() {
-        return placeService.getAllPlaces();
+    public ModelAndView getAllPlaces(Authentication authentication, Map<String, Object> model) {
+        List<Place> places = placeService.getAllPlaces();
+        if(authentication != null)
+            model.put("name", "<h3>Username: " + authentication.getName() + "</h3>");
+        model.put("places", places);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("places");
+        return modelAndView;
     }
 
     @RequestMapping("/places/name/{name}")

@@ -67,9 +67,15 @@ public class EventController {
 //        return eventService.getEventsByCategory(categoryService.getCategoryByName(name));
 //    }
 
-    @RequestMapping("/places/{name}/events")
-    public List<Event> getEventsByPlace(@PathVariable String name) {
-        return eventService.getEventsByPlace(placeService.getPlaceByName(name));
+    @RequestMapping("/place/{id}/events")
+    public ModelAndView getEventsByPlace(@PathVariable int id,  Map<String, Object> model) {
+
+        List<Event> events = eventService.getEventsByPlace(placeService.getPlaceById(id));
+        model.put("place", placeService.getPlaceById(id).getName());
+        model.put("events", events);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("eventsbyplace");
+        return modelAndView;
     }
 
     @RequestMapping("/events/date/{date}")

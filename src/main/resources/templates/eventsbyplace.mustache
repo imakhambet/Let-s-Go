@@ -15,20 +15,20 @@
 <p><a href="/places">Places</a></p>
 <p>{{#link}} {{{.}}} {{/link}}</p>
 
-<h2>Events</h2>
+<h2>Events in <span style="color: cornflowerblue">{{#place}}{{{.}}}{{/place}}</span></h2>
 
 
 <div style="display: block; width: 100%; margin-top: 30px;" >
-{{#events}}
-    <div style="border: 1px solid black;
+    {{#events}}
+        <div style="border: 1px solid black;
      width: 200px; margin: 20px 0 0 20px; display: inline-block;">
-        <p style="font-weight: 900">{{name}}</p>
-        <p>Place: {{place.name}}</p>
-        <p>Description: {{description}}</p>
-        <p>Date: {{date}}</p>
-        <a href="/event/{{id}}">More...</a>
-    </div>
-{{/events}}
+            <p style="font-weight: 900">{{name}}</p>
+            <p>Place: {{place.name}}</p>
+            <p>Description: {{description}}</p>
+            <p>Date: {{date}}</p>
+            <a href="/event/{{id}}">More...</a>
+        </div>
+    {{/events}}
 </div>
 </body>
 </html>

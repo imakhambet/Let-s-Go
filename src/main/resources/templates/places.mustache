@@ -12,23 +12,20 @@
 <p>{{#logout}} {{{.}}} {{/logout}}</p>
 <p>{{#login}} {{{.}}} {{/login}}</p>
 <p>{{#registration}} {{{.}}} {{/registration}}</p>
-<p><a href="/places">Places</a></p>
 <p>{{#link}} {{{.}}} {{/link}}</p>
 
-<h2>Events</h2>
+<h2>Places</h2>
 
 
 <div style="display: block; width: 100%; margin-top: 30px;" >
-{{#events}}
-    <div style="border: 1px solid black;
+    {{#places}}
+        <div style="border: 1px solid black;
      width: 200px; margin: 20px 0 0 20px; display: inline-block;">
-        <p style="font-weight: 900">{{name}}</p>
-        <p>Place: {{place.name}}</p>
-        <p>Description: {{description}}</p>
-        <p>Date: {{date}}</p>
-        <a href="/event/{{id}}">More...</a>
-    </div>
-{{/events}}
+            <p style="font-weight: 900">Name: {{name}}</p>
+            <p>Address: {{address}}</p>
+            <a href="/place/{{id}}/events">Events</a>
+        </div>
+    {{/places}}
 </div>
 </body>
 </html>
