@@ -2,24 +2,71 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Hello World!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
 </head>
 <body>
-<h1><a href="/">Let's GO</a></h1>
-
-<p>{{#name}} {{{.}}} {{/name}}</p>
-
-<h2>My orders</h2>
-
-<div style="display: block; width: 100%; margin-top: 30px;">
-{{#orders}}
-        <div style="border-top: 2px solid black; border-bottom: 2px solid black">
-            <p style="font-weight: 900">Order : 000{{id}}</p>
-            <p>Event: {{eventTicket.event.name}}</p>
-            <p>Ticket type: {{eventTicket.name}}</p>
-            <p>Total price: {{totalPrice}}</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">Lets go</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <p class="nav-item nav-link mt-3">{{#name}} {{{.}}} {{/name}}</p>
         </div>
     </div>
-{{/orders}}
+</nav>
+
+
+
+<h2>My orders</h2>
+<hr style="border: 0;
+           height: 1px;
+           background: #333;
+           background-image: linear-gradient(to right, #ccc, #333, #ccc);">
+
+
+<div class="container mt-5">
+
+    <div class="row">
+        {{#orders}}
+            <div class="col-sm-6" style="height: 450px;
+                                       width: 200px;
+                                       margin: 50px auto;
+                                       border-radius: 7px 7px 7px 7px;
+                                       -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+                                       -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+                                       box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);">
+                <div style="height: 300px;width: 327px;">
+                    <h1 style="margin: 0 0 0 38px;padding-top: 52px;font-size: 34px;color: #474747;font-family: 'Bentham', serif;">Event: {{eventTicket.event.name}}</h1>
+                    <h2 style="margin: 0 0 47px 38px;
+                               font-size: 13px;
+                               font-family: 'Raleway', sans-serif;
+                               font-weight: 400;
+                               text-transform: uppercase;
+                               color: #d2d2d2;
+                               letter-spacing: 0.2em;">
+                        Ticket type: {{eventTicket.name}}</h2>
+                    <h2 style="margin: 0 0 47px 38px;
+                               font-size: 13px;
+                               font-family: 'Raleway', sans-serif;
+                               font-weight: 400;
+                               text-transform: uppercase;
+                               color: #d2d2d2;
+                               letter-spacing: 0.2em;">
+                        Total price: {{totalPrice}}</h2>
+                </div>
+            </div>
+        {{/orders}}
+    </div>
+
+</div>
+
+
 
 
 </body>

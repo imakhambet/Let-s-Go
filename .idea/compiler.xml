@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="b191-ear" />
         <module name="EarHentai" />
+        <module name="b191-ear" />
         <module name="example" />
       </profile>
     </annotationProcessing>
@@ -15,6 +15,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="EarHentai" options="-parameters" />
+      <module name="b191-ear" options="-parameters" />
       <module name="example" options="-parameters" />
     </option>
   </component>
