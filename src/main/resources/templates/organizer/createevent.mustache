@@ -8,6 +8,10 @@
 <h2>add new event</h2>
 
 <form method="post" class="addEvent" style="display: block" action="/addevent">
+    {{#errors}}
+        {{{.}}}
+    {{/errors}}
+
     <label for="eventname">Name: </label>
     <input type="text" name="name" id="eventname">
 

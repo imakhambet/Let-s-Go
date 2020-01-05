@@ -8,6 +8,10 @@
 <h2>Add new place</h2>
 
 <form method="post" class="addPlace" style="display: block" action="/addplace">
+    {{#errors}}
+        {{{.}}}
+    {{/errors}}
+
     <label for="placename">Place name: </label>
     <input type="text" name="name" id="placename">
 

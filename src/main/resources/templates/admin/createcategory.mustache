@@ -8,6 +8,10 @@
 <h2>Add new place</h2>
 
 <form method="post" class="addCategory" style="display: block" action="/addcategory">
+    {{#errors}}
+        {{{.}}}
+    {{/errors}}
+
     <label for="categoryname">Category name: </label>
     <input type="text" name="name" id="categoryname">
 
