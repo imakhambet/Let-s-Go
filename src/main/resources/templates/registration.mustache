@@ -15,8 +15,8 @@
     <div><label> UserName : <input type="text" name="username"/> </label></div>
     <div><label> Email : <input type="text" name="email"/> </label></div>
     <div><label> Password: <input type="password" name="password"/> </label></div>
+    <p><input name="role" type="radio" value="ROLE_USER" checked> User</p>
     <p><input name="role" type="radio" value="ROLE_ORGANIZER" > Organizer</p>
-    <p><input name="role" type="radio" value="ROLE_USER"> User</p>
 
     <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
     <div><input type="submit" value="Sign In"/></div>
