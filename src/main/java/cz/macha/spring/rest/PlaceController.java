@@ -4,7 +4,6 @@ import cz.macha.spring.model.Place;
 
 import cz.macha.spring.service.PlaceService;
 import cz.macha.spring.service.UserService;
-import cz.macha.spring.validation.PlaceValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -41,27 +40,11 @@ public class PlaceController {
     @PostMapping("/addplace")
     public ModelAndView addPlace(@RequestParam String name,
                                  @RequestParam String address,
-                                 Authentication auth, Map<String, Object> model){
-        PlaceValidation validation = new PlaceValidation(placeService);
-        validation.validation(name, address);
-        List<String> placeErrors = validation.getErrors();
-
+                                 Authentication auth){
+        Place place = new Place(name, adminService.getUserByLogin(auth.getName()), address);
+        placeService.addPlace(place);
         ModelAndView modelAndView = new ModelAndView();
-
-        if (placeErrors.size() == 0) {
-            name = name.toLowerCase();
-            address = address.toLowerCase();
-            Place place = new Place(name, adminService.getUserByLogin(auth.getName()), address);
-            placeService.addPlace(place);
-            modelAndView.setViewName("redirect:/admin");
-            return modelAndView;
-        }
-        StringBuilder errors = new StringBuilder();
-        for (String error: placeErrors)
-            errors.append("<p>").append(error).append("</p>");
-
-        model.put("errors", errors.toString());
-        modelAndView.setViewName("admin/createplace");
+        modelAndView.setViewName("redirect:/admin");
         return modelAndView;
     }
 
