@@ -25,10 +25,10 @@ public class CategoryValidation {
 
     private void name(String name){
         if(name.isEmpty()){
-            errors.add("Category is required");
+            errors.add("CATEGORY NAME IS REQUIRED");
         }
         else if(categoryService.getCategoryByName(name) != null){
-            errors.add("Category exists");
+            errors.add("CATEGORY ALREADY EXISTS");
         }
     }
 

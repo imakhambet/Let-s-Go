@@ -126,9 +126,32 @@
         #eventDetailsOther p + p {
             margin-left: 32px;
         }
+        #eventCat{
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        #eventCategories {
+            color: #8d8d8d;
+            font-size: 20px;
+            text-transform: lowercase;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        #eventCategories span+span{
+            margin-left: 35px;
+        }
+
+        #addCtgr{
+            color: cornflowerblue;
+        }
 
         #eventDescr {
-            margin: 40px 0 20px;
+            margin: 30px 0 20px;
             text-align: center;
         }
 
@@ -145,6 +168,10 @@
             margin: 50px 0 20px;
         }
 
+        #addticket{
+            color: cornflowerblue;
+            font-size: 20px;
+        }
         #tickets {
             display: flex;
             flex-wrap: wrap;
@@ -176,9 +203,22 @@
         }
 
         #addticket{
+            margin-bottom: 100px;
             display: block;
             text-align: center;
         }
+
+        .error{
+            text-align: center;
+            color: firebrick;
+            font-size: 14px;
+            line-height: 10px;
+        }
+
+        #authName{
+            color: cornflowerblue;
+        }
+
     </style>
 </head>
 
@@ -191,7 +231,7 @@
 
             <li id="logo"><a id="logoA" href="/">LET'S GO</a></li>
             <li id="places"><a href="/places">Places</a></li>
-            <li id="categories"><a href="#">Categories</a></li>
+            <li id="categories"><a href="/categories">Categories</a></li>
             {{#login}} {{{.}}} {{/login}}
             {{#registration}} {{{.}}} {{/registration}}
             {{#name}} {{{.}}} {{/name}}
@@ -214,6 +254,14 @@
                     <p>Organizer: {{organizer.login}}</p>
                 </div>
 
+                <h4 id="eventCat">Categories</h4>
+                <div id="eventCategories">
+                   {{#category}}<span>{{name}}</span>
+                    {{/category}}
+                    <span id="addCatLink">{{#addCtgr}}{{{.}}}{{/addCtgr}}</span>
+                </div>
+
+
                 <h4 id="eventDescr">Description</h4>
                 <p id="eventDescription">{{description}}</p>
             </div>
@@ -222,8 +270,9 @@
 
 
         <h3 id="ticketIns">Tickets</h3>
-        {{#createticket}}{{{.}}}{{/createticket}}
-
+        {{#errors}}
+            {{{.}}}
+        {{/errors}}
         <div id="tickets">
             {{#tickets}}
 
@@ -237,7 +286,9 @@
                 </div>
 
             {{/tickets}}
+
         </div>
+        {{#createticket}}{{{.}}}{{/createticket}}
     </div>
 </div>
 </div>

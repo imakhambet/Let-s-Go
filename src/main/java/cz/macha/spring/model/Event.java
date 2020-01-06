@@ -31,7 +31,7 @@ public class Event {
     @JoinTable(name = "event_categories",
             joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> category;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "place_id")
@@ -69,11 +69,11 @@ public class Event {
 
     @JsonIgnore
     public Set<Category> getCategory() {
-        return categories;
+        return category;
     }
 
     public void setCategory(Set<Category> category) {
-        this.categories = category;
+        this.category = category;
     }
 
     @JsonIgnore
@@ -123,19 +123,19 @@ public class Event {
         this.eventTickets = eventTickets;
     }
 
-    public void addCategory(Category category) {
-        Objects.requireNonNull(category);
-        if (categories == null) {
-            this.categories = new HashSet<>();
+    public void addCategory(Category category1) {
+        Objects.requireNonNull(category1);
+        if (category == null) {
+            this.category = new HashSet<>();
         }
-        categories.add(category);
+        category.add(category1);
     }
 
-    public void removeCategory(Category category) {
-        Objects.requireNonNull(category);
-        if (categories == null) {
+    public void removeCategory(Category category1) {
+        Objects.requireNonNull(category1);
+        if (category == null) {
             return;
         }
-        categories.removeIf(c -> Objects.equals(c.getId(), category.getId()));
+        category.removeIf(c -> Objects.equals(c.getId(), category1.getId()));
     }
 }

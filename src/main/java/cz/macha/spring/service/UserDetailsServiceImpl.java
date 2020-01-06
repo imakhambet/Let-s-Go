@@ -27,7 +27,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         } else {
             throw new UsernameNotFoundException("User not exist with name : " + username);
         }
-        System.out.println(userDetails.getAuthorities());
         return userDetails;
 
     }

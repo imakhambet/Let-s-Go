@@ -48,8 +48,7 @@ public class EventTicketController {
         }
         StringBuilder errorsS = new StringBuilder();
         for (String error : errors) {
-            errorsS.append("<p>").append(error).append("</p>");
-            System.out.println(error);
+            errorsS.append("<p class=\"error\">").append(error).append("</p>");
         }
         model.put("errors", errorsS.toString());
         modelAndView.setViewName("organizer/createticket");

@@ -31,11 +31,11 @@ public class TicketValidation {
 
     void name(String name, int eventID) {
         if (name.isEmpty()) {
-            errors.add("empty name");
+            errors.add("TICKET NAME IS REQUIRED");
         } else {
             for (EventTicket ticket : eventService.getEvent(eventID).getEventTickets()) {
                 if (ticket.getName().equals(name)) {
-                    errors.add("you have ticket with this name");
+                    errors.add("DUPLICATE TICKET NAME");
                 }
             }
         }
@@ -43,14 +43,14 @@ public class TicketValidation {
 
     void price(String price) {
         if (price.isEmpty()) {
-            errors.add("empty price");
+            errors.add("PRICE IS REQUIRED");
         } else {
             try {
                 float priceF = Float.parseFloat(price);
                 if (priceF < 0)
-                    errors.add("not correct price");
+                    errors.add("PRICE IS NOT CORRECT");
             } catch (NumberFormatException ex) {
-                errors.add("not correct price");
+                errors.add("PRICE IS NOT CORRECT");
             }
         }
 
@@ -58,14 +58,14 @@ public class TicketValidation {
 
     void quantity(String quantity) {
         if(quantity.isEmpty()){
-            errors.add("empty quantity");
+            errors.add("TICKET QUANTITY IS REQUIRED");
         }else {
             try {
                 float quantityF = Integer.parseInt(quantity);
                 if (quantityF == 0)
-                    errors.add("not correct quantity");
+                    errors.add("TICKET QUANTITY IS NOT CORRECT");
             } catch (NumberFormatException ex) {
-                errors.add("not correct quantity");
+                errors.add("TICKET QUANTITY IS NOT CORRECT");
             }
         }
     }

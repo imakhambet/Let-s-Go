@@ -1,5 +1,6 @@
 package cz.macha.spring.service;
 
+import cz.macha.spring.model.EventTicket;
 import cz.macha.spring.model.User;
 import cz.macha.spring.repository.OrderRepository;
 import cz.macha.spring.model.Order;
@@ -22,6 +23,10 @@ public class OrderService {
         return orderRepository.findOrdersByCustomerOrderByIdDesc(customer);
     }
 
+    public List<Order> getOrdersByTicket(EventTicket ticket){
+        return orderRepository.findOrdersByEventTicket(ticket);
+    }
+
     public void addOrders(Order order){
         orderRepository.save(order);
     }
@@ -30,4 +35,7 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
+    public int getCountByTicket(EventTicket eventTicket){
+        return orderRepository.countByEventTicket(eventTicket);
+    }
 }

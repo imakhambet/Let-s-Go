@@ -29,7 +29,7 @@ public class Category {
     @JoinColumn(name = "creator_id")
     private User creator;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "category")
     private Set<Event> events;
 
     public Integer getId() {

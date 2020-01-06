@@ -1,5 +1,6 @@
 package cz.macha.spring.service;
 
+import cz.macha.spring.model.Category;
 import cz.macha.spring.model.User;
 import cz.macha.spring.repository.EventRepository;
 //import cz.macha.spring.model.Category;
@@ -32,6 +33,10 @@ public class EventService {
 
     public List<Event> getEventsByPlace(Place place){
         return eventRepository.findEventsByPlace(place);
+    }
+
+    public List<Event> getEventsByCategory(Category category){
+        return eventRepository.findEventsByCategory(category);
     }
 
     public List<Event> getEventsByDate(String date){

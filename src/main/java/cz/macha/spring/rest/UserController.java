@@ -58,7 +58,7 @@ public class UserController {
         }
         StringBuilder errors = new StringBuilder();
         for (String error: regValidation.getErrors())
-            errors.append("<p>").append(error).append("</p>");
+            errors.append("<p class=\"error\">").append(error).append("</p>");
 
         model.put("errors", errors.toString());
         modelAndView.setViewName("registration");
@@ -113,7 +113,7 @@ public class UserController {
 
         StringBuilder errors = new StringBuilder();
         for (String error: eventErrors)
-            errors.append("<p>").append(error).append("</p>");
+            errors.append("<p class=\"error\">").append(error).append("</p>");
 
         model.put("errors", errors.toString());
         modelAndView.setViewName("organizer/createevent");

@@ -2,6 +2,7 @@ package cz.macha.spring.rest;
 
 import cz.macha.spring.model.Event;
 //import cz.macha.spring.service.CategoryService;
+import cz.macha.spring.service.CategoryService;
 import cz.macha.spring.service.EventService;
 import cz.macha.spring.service.PlaceService;
 import cz.macha.spring.service.UserService;
@@ -19,8 +20,8 @@ public class EventController {
 
     @Autowired
     private UserService organizerService;
-    //    @Autowired
-//    private CategoryService categoryService;
+    @Autowired
+    private CategoryService categoryService;
     @Autowired
     private PlaceService placeService;
 
@@ -35,15 +36,17 @@ public class EventController {
     @RequestMapping("/event/{id}")
     public ModelAndView getEvent(@PathVariable Integer id, Map<String, Object> model, Authentication authentication) {
         if(authentication != null) {
-            model.put("name", "<li><a href=\"#\">" + authentication.getName() + "</a></li>");
+            model.put("name", "<li><a href=\"#\" id=\"authName\">" + authentication.getName() + "</a></li>");
             model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
 
             if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ORGANIZER"))) {
 
                 model.put("link", "<li id=\"link\"><a href=\"/createevent\">Add new event</a></li>");
                 if(organizerService.getUserByLogin(authentication.getName()).
-                        equals(eventService.getEvent(id).getOrganizer()))
-                    model.put("createticket", "<a href=\"/createticket/"+id+"\" id=\"addticket\">Add ticket</a>");
+                        equals(eventService.getEvent(id).getOrganizer())) {
+                    model.put("createticket", "<a href=\"/createticket/" + id + "\" id=\"addticket\">Add ticket</a>");
+                    model.put("addCtgr", "<a href=\"/addcategory/" + id + "\" id=\"addCtgr\">Add category</a>");
+                }
             }
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
                 model.put("link", "<li id=\"link\"><a href=\"/admin\">Admin page </a></li>");
@@ -76,7 +79,7 @@ public class EventController {
     public ModelAndView getEventsByPlace(@PathVariable int id,  Map<String, Object> model,
                                          Authentication authentication) {
         if (authentication != null) {
-            model.put("name", "<li><a href=\"#\">" + authentication.getName() + "</a></li>");
+            model.put("name", "<li><a href=\"#\" id=\"authName\">" + authentication.getName() + "</a></li>");
             model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
 
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ORGANIZER"))) {
@@ -97,6 +100,34 @@ public class EventController {
         model.put("events", events);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("eventsbyplace");
+        return modelAndView;
+    }
+
+    @RequestMapping("/category/{id}/events")
+    public ModelAndView getEventsByCategory(@PathVariable int id,  Map<String, Object> model,
+                                         Authentication authentication) {
+        if (authentication != null) {
+            model.put("name", "<li><a href=\"#\" id=\"authName\">" + authentication.getName() + "</a></li>");
+            model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
+
+            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ORGANIZER"))) {
+                model.put("link", "<li id=\"link\"><a href=\"/createevent\">Add new event</a></li>");
+            }
+            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+                model.put("link", "<li id=\"link\"><a href=\"/admin\">Admin page </a></li>");
+            }
+            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
+                model.put("link", "<li id=\"link\"><a href=\"/myorders\">My orders</a></li>");
+            }
+        } else {
+            model.put("login", "<li id=\"login\"><a href=\"/login\">Login</a></li>");
+            model.put("registration", "<li id=\"registration\"><a href=\"/registration\">Registration</a></li>");
+        }
+        List<Event> events = eventService.getEventsByCategory(categoryService.getCategory(id));
+        model.put("category", categoryService.getCategory(id).getName().toLowerCase());
+        model.put("events", events);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("eventsbycategory");
         return modelAndView;
     }
 

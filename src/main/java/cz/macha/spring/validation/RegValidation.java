@@ -29,9 +29,9 @@ public class RegValidation {
 
     void username(String username) {
         if (username.length() < 6)
-            errors.add("short username");
+            errors.add("USERNAME MUST BE AT LEAST 6 CHARACTERS");
         else if (userService.getUserByLogin(username) != null)
-            errors.add("username " + username + " exists");
+            errors.add("USERNAME " + username + " ALREADY TAKEN");
 
     }
 
@@ -40,13 +40,13 @@ public class RegValidation {
                 Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
         if (!VALID_EMAIL_ADDRESS_REGEX.matcher(email).find())
-            errors.add("not correct email");
+            errors.add("EMAIL IS NOT CORRECT");
 
     }
 
     void password(String password) {
         if (password.length() < 6)
-            errors.add("short password, at least 6");
+            errors.add("PASSWORD MUST BE AT LEAST 6 CHARACTERS");
     }
 
 

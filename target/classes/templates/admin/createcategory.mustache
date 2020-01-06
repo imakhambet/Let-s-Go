@@ -79,7 +79,51 @@
             left: 175px;
             width: calc(100% - 175px);
         }
+        .error{
+            text-align: center;
+            color: firebrick;
+            font-size: 14px;
+            line-height: 10px;
+        }
 
+
+        #addCategoryIns {
+            text-align: center;
+            margin: 40px 0 40px;
+        }
+
+        #addCategoryForm {
+            display: block;
+        }
+
+        #addCategoryForm label, #addCategoryForm input {
+            display: block;
+            margin: 0 auto;
+        }
+
+        #addCategoryForm label {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #addCategoryButton {
+            background-color: cornflowerblue;
+            padding: 5px;
+            display: block;
+            width: 140px;
+            height: 45px;
+            margin: 25px auto 0;
+        }
+
+        #logoA {
+            font-size: 25px;
+            font-weight: bold;
+            color: cornflowerblue;
+        }
+
+        #authName{
+            color: cornflowerblue;
+        }
     </style>
 </head>
 <body>
@@ -87,9 +131,9 @@
     <div class="menu">
         <ul class="menuMenu">
 
-            <li id="places"><a href="/">LET'S GO</a></li>
+            <li><a href="/" id="logoA">LET'S GO</a></li>
             <li id="places"><a href="/places">Places</a></li>
-            <li id="categories"><a href="#">Categories</a></li>
+            <li id="categories"><a href="/categories">Categories</a></li>
             {{#name}} {{{.}}} {{/name}}
             {{#link}} {{{.}}} {{/link}}
             {{#logout}} {{{.}}} {{/logout}}
@@ -98,9 +142,9 @@
     </div>
 
     <div class="content">
-        <h2>Add new place</h2>
+        <h2 id="addCategoryIns">Add new category</h2>
 
-        <form method="post" class="addCategory" style="display: block" action="/addcategory">
+        <form method="post" class="addCategory" style="display: block" action="/addcategory" id="addCategoryForm">
             {{#errors}}
                 {{{.}}}
             {{/errors}}
@@ -109,7 +153,7 @@
             <input type="text" name="name" id="categoryname">
 
             <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-            <button type="submit">Add</button>
+            <button type="submit" id="addCategoryButton">Add</button>
         </form>
     </div>
 </div>

@@ -27,7 +27,7 @@ public class PlaceController {
     public ModelAndView getAllPlaces(Authentication authentication, Map<String, Object> model) {
         List<Place> places = placeService.getAllPlaces();
         if (authentication != null) {
-            model.put("name", "<li><a href=\"#\">" + authentication.getName() + "</a></li>");
+            model.put("name", "<li><a href=\"#\" id=\"authName\">" + authentication.getName() + "</a></li>");
             model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
 
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ORGANIZER"))) {
@@ -65,8 +65,6 @@ public class PlaceController {
         ModelAndView modelAndView = new ModelAndView();
 
         if (placeErrors.size() == 0) {
-            name = name.toLowerCase();
-            address = address.toLowerCase();
             Place place = new Place(name, adminService.getUserByLogin(auth.getName()), address);
             placeService.addPlace(place);
             modelAndView.setViewName("redirect:/admin");
@@ -74,7 +72,7 @@ public class PlaceController {
         }
         StringBuilder errors = new StringBuilder();
         for (String error: placeErrors)
-            errors.append("<p>").append(error).append("</p>");
+            errors.append("<p class=\"error\">").append(error).append("</p>");
 
         model.put("errors", errors.toString());
         modelAndView.setViewName("admin/createplace");

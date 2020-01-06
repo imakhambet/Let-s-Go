@@ -14,17 +14,19 @@
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
     <style>
-        *{
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             letter-spacing: 1px;
 
         }
-        a{
+
+        a {
             text-decoration: none;
         }
-        a:hover{
+
+        a:hover {
             text-decoration: none;
         }
 
@@ -32,18 +34,18 @@
             list-style: none;
         }
 
-        body, html{
+        body, html {
             font-family: 'Prompt', sans-serif;
-            color: rgb(47,47,48);
+            color: rgb(47, 47, 48);
         }
 
-        .container{
+        .container {
             width: 100%;
             background-color: #f6f6f6;
         }
 
         /** MENU **/
-        .menu{
+        .menu {
             left: 0;
             overflow: auto;
             position: fixed;
@@ -53,32 +55,34 @@
         }
 
 
-        .menuMenu{
+        .menuMenu {
             width: 175px;
             margin: 5px auto;
         }
 
-        .menuMenu li{
+        .menuMenu li {
             width: 100%;
             height: 60px;
             text-align: center;
         }
-        .menuMenu li a{
+
+        .menuMenu li a {
             width: 100%;
             line-height: 60px;
             color: #f6f6f6;
             font-size: 16px;
         }
 
-        .menuMenu li a:hover{
+        .menuMenu li a:hover {
             color: cornflowerblue;
         }
 
-        .content{
+        .content {
             position: absolute;
             left: 175px;
             width: calc(100% - 175px);
         }
+
         .error{
             text-align: center;
             color: firebrick;
@@ -86,26 +90,26 @@
             line-height: 10px;
         }
 
-        #addPlaceIns {
+        #addCategoryEvIns {
             text-align: center;
             margin: 40px 0 40px;
         }
 
-        #addPlaceForm {
+        #addCategoryEvForm {
             display: block;
         }
 
-        #addPlaceForm label, #addPlaceForm input {
+        #addCategoryEvForm label, #addCategoryEvForm input {
             display: block;
             margin: 0 auto;
         }
 
-        #addPlaceForm label {
+        #addCategoryEvForm label {
             margin-top: 20px;
             text-align: center;
         }
 
-        #addPlaceButton {
+        #addCategoryEvButton {
             background-color: cornflowerblue;
             padding: 5px;
             display: block;
@@ -126,6 +130,7 @@
         }
     </style>
 </head>
+
 <body>
 <div class="container">
     <div class="menu">
@@ -142,24 +147,20 @@
     </div>
 
     <div class="content">
-        <h2 id="addPlaceIns">Add new place</h2>
+        <h2 id="addCategoryEvIns">Add category for event</h2>
 
-        <form method="post" class="addPlace" style="display: block" action="/addplace" id="addPlaceForm">
+        <form method="post" class="addCategoryEv" id="addCategoryEvForm" style="display: block" action="/addcategoryev/{{#id}}{{.}}{{/id}}">
             {{#errors}}
                 {{{.}}}
             {{/errors}}
 
-            <label for="placename">Place name: </label>
-            <input type="text" name="name" id="placename">
-
-            <label for="address">Address: </label>
-            <input type="text" name="address" id="address">
+            <label for="categoryName">Category</label>
+            <input type="text" name="name" id="categoryName">
 
             <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-            <button type="submit" id="addPlaceButton">Add</button>
+            <button type="submit" id="addCategoryEvButton">Add</button>
         </form>
     </div>
 </div>
-
 </body>
 </html>

@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
 //                .antMatchers("/buyticket/*").hasRole("USER")
                 .and()
-                .logout().logoutSuccessUrl("/login")
+                .logout().logoutSuccessUrl("/")
                 .and().formLogin();
     }
 

@@ -26,16 +26,16 @@ public class PlaceValidation {
 
     private void name(String name){
         if(name.isEmpty()){
-            errors.add("Name is required");
+            errors.add("PLACE NAME IS REQUIRED");
         }
         else if(placeService.getPlaceByName(name) != null){
-            errors.add("Name exists");
+            errors.add("NAME ALREADY EXISTS");
         }
     }
 
     private void address(String address){
         if(address.isEmpty()){
-            errors.add("Address is required");
+            errors.add("ADDRESS IS REQUIRED");
         }
     }
 
