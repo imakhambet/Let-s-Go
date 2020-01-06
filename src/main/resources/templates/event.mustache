@@ -87,8 +87,10 @@
         }
 
         #logoA {
-            font-size: 25px;
+            font-size: 28px;
             font-weight: bold;
+            margin-top: 15px;
+            display: block;
             color: cornflowerblue;
         }
 
@@ -104,9 +106,8 @@
         }
 
         #eventDetailsName {
-            margin: 60px 0 40px;
+            margin: 30px 0 40px;
             text-align: center;
-            font-size: 45px;
         }
 
         #eventDet {
@@ -126,7 +127,8 @@
         #eventDetailsOther p + p {
             margin-left: 32px;
         }
-        #eventCat{
+
+        #eventCat {
             text-align: center;
             margin-top: 30px;
             margin-bottom: 15px;
@@ -142,11 +144,11 @@
             flex-wrap: wrap;
         }
 
-        #eventCategories span+span{
+        #eventCategories span + span {
             margin-left: 35px;
         }
 
-        #addCtgr{
+        #addCtgr {
             color: cornflowerblue;
         }
 
@@ -163,15 +165,16 @@
             text-align: center;
         }
 
-        #ticketIns{
+        #ticketIns {
             text-align: center;
             margin: 50px 0 20px;
         }
 
-        #addticket{
+        #addticket {
             color: cornflowerblue;
             font-size: 20px;
         }
+
         #tickets {
             display: flex;
             flex-wrap: wrap;
@@ -190,32 +193,34 @@
             justify-content: space-between;
             text-align: center;
         }
-        #quantity{
+
+        #quantity {
             width: 50px;
             height: 25px;
         }
-        #buyticket{
+
+        #buyticket {
             background-color: cornflowerblue;
             padding: 5px;
-            display:block;
+            display: block;
             width: 80px;
             margin: 15px auto 0;
         }
 
-        #addticket{
+        #addticket {
             margin-bottom: 100px;
             display: block;
             text-align: center;
         }
 
-        .error{
+        .error {
             text-align: center;
             color: firebrick;
             font-size: 14px;
             line-height: 10px;
         }
 
-        #authName{
+        #authName {
             color: cornflowerblue;
         }
 
@@ -236,6 +241,7 @@
             {{#registration}} {{{.}}} {{/registration}}
             {{#name}} {{{.}}} {{/name}}
             {{#link}} {{{.}}} {{/link}}
+            {{#link2}} {{{.}}} {{/link2}}
             {{#logout}} {{{.}}} {{/logout}}
 
         </ul>
@@ -256,9 +262,9 @@
 
                 <h4 id="eventCat">Categories</h4>
                 <div id="eventCategories">
-                   {{#category}}<span>{{name}}</span>
+                    {{#category}}<span>{{name}}</span>
                     {{/category}}
-                    <span id="addCatLink">{{#addCtgr}}{{{.}}}{{/addCtgr}}</span>
+                    {{#addCtgr}}{{{.}}}{{/addCtgr}}
                 </div>
 
 

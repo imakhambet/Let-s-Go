@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Spring Security Example </title>
+    <title>Hello World!</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
@@ -92,58 +92,65 @@
             width: calc(100% - 175px);
         }
 
-        #regIns {
+        #eventsInPrg {
             text-align: center;
-            margin: 30px 0 40px;
+            margin-top: 30px;
         }
 
-        #regForm {
-            display: block;
+        #events {
+            display: flex;
+            flex-wrap: wrap;
+            width: 80%;
+            margin: 30px auto;
+            justify-content: center;
         }
 
-        #inputs label, #inputs input {
-            display: block;
-            margin: 0 auto;
+        #event {
+            margin: 15px 15px;
+            border-radius: 7px 7px 7px 7px;
+            box-shadow: 0 14px 32px 0 rgba(0, 0, 0, 0.15);
+            padding: 20px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        #regForm label {
-            margin-top: 20px;
-            text-align: center;
+        #eventName {
+            font-size: 26px;
+            width: 100%;
         }
 
-        #radiosReg{
-            width: 500px;
-            margin: 0 auto;
+        #placeDate {
+            width: 100%;
+            margin: 10px 0;
         }
 
-        #radiosReg label{
-            display: block;
-        }
-
-        #signin {
-            background-color: cornflowerblue;
-            padding: 5px;
-            display: block;
-            width: 140px;
-            height: 45px;
-            margin: 25px auto 0;
-        }
-
-        .error{
-            text-align: center;
-            color: firebrick;
+        #placeDate p {
             font-size: 14px;
-            line-height: 10px;
+            width: 100%;
+            text-transform: uppercase;
+            color: #8d8d8d;
         }
 
+        #eventMore{
+            color: cornflowerblue;
+        }
+
+        #deleteEvent{
+            color: tomato;
+            margin-top: 3px;
+        }
 
         #authName{
             color: cornflowerblue;
         }
+
     </style>
 
 </head>
 <body>
+
+
 <div class="container">
     <div class="menu">
         <ul class="menuMenu">
@@ -151,34 +158,33 @@
             <li id="logo"><a id="logoA" href="/">LET'S GO</a></li>
             <li id="places"><a href="/places">Places</a></li>
             <li id="categories"><a href="/categories">Categories</a></li>
-            {{#login}} {{{.}}} {{/login}}
-            {{#registration}} {{{.}}} {{/registration}}
             {{#name}} {{{.}}} {{/name}}
             {{#link}} {{{.}}} {{/link}}
+            {{#link2}} {{{.}}} {{/link2}}
             {{#logout}} {{{.}}} {{/logout}}
 
         </ul>
     </div>
 
     <div class="content">
-        <h2 id="regIns">New user registration</h2>
+        <h2 id="eventsInPrg" style="">My events</h2>
 
-        <form action="/registration" method="post" id="regForm">
-        {{#errors}}
-            {{{.}}}
-        {{/errors}}
-        <div id="inputs">
-            <label> Username<input type="text" name="username"/> </label>
-            <label> Email <input type="text" name="email"/> </label>
-            <label> Password <input type="password" name="password"/> </label>
+        <div id="events">
+            {{#events}}
+                <div id="event">
+
+                    <h2 id="eventName">{{name}}</h2>
+
+                    <div id="placeDate">
+                        <p> place: {{place.name}}</p>
+                        <p> date: {{date}}</p>
+                        <p> price from: ...</p>
+                    </div>
+                    <a href="/event/{{id}}" id="eventMore">MORE</a>
+                    <a href="/deleteevent/{{id}}" data-method="delete" id="deleteEvent">DELETE</a>
+                </div>
+            {{/events}}
         </div>
-        <div id="radiosReg">
-            <label><input name="role" type="radio" value="ROLE_USER" checked> User</label>
-            <label><input name="role" type="radio" value="ROLE_ORGANIZER"> Organizer</label>
-        </div>
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-        <input type="submit" value="Sign in" id="signin"/>
-        </form>
     </div>
 </div>
 </body>

@@ -1,5 +1,6 @@
 package cz.macha.spring.rest;
 
+import cz.macha.spring.model.User;
 import cz.macha.spring.service.EventService;
 import cz.macha.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,13 @@ public class MainController {
     @RequestMapping("/")
     public String home(Map<String, Object> model, Authentication authentication) {
         if (authentication != null) {
+
             model.put("name", "<li><a href=\"#\" id=\"authName\">" + authentication.getName() + "</a></li>");
             model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
 
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ORGANIZER"))) {
                 model.put("link", "<li id=\"link\"><a href=\"/createevent\">Add new event</a></li>");
+                model.put("link2", "<li><a href=\"/myevents\" id=\"myEvents\">My events</a></li>");
             }
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
                 model.put("link", "<li id=\"link\"><a href=\"/admin\">Admin page </a></li>");
@@ -47,6 +50,7 @@ public class MainController {
         model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
 
         model.put("link", "<li id=\"link\"><a href=\"/createevent\">Add new event</a></li>");
+        model.put("link2", "<li><a href=\"/myevents\" id=\"myEvents\">My events</a></li>");
         return "organizer/createevent";
     }
 
@@ -56,6 +60,7 @@ public class MainController {
         model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
 
         model.put("link", "<li id=\"link\"><a href=\"/createevent\">Add new event</a></li>");
+        model.put("link2", "<li><a href=\"/myevents\" id=\"myEvents\">My events</a></li>");
         model.put("id", id);
         return "organizer/createticket";
     }
@@ -66,6 +71,8 @@ public class MainController {
         model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
 
         model.put("link", "<li id=\"link\"><a href=\"/createevent\">Add new event</a></li>");
+        model.put("link2", "<li><a href=\"/myevents\" id=\"myEvents\">My events</a></li>");
+
         model.put("id", id);
         return "organizer/addcategory";
     }

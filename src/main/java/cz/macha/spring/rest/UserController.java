@@ -86,9 +86,7 @@ public class UserController {
         userService.addAnswer(oId, qId, answer);
     }
 
-    //    @RequestMapping(method = RequestMethod.POST,
-//////            value = "/newevent")
-//            value = "/organizers/{id}/events")
+
     @PostMapping("/addevent")
     public ModelAndView createEvent(@RequestParam String name,
                                     @RequestParam String description,

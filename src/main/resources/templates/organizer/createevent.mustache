@@ -77,9 +77,11 @@
             color: cornflowerblue;
         }
 
-        #logoA {
-            font-size: 25px;
+        #logoA{
+            font-size: 28px;
             font-weight: bold;
+            margin-top: 15px;
+            display: block;
             color: cornflowerblue;
         }
 
@@ -91,7 +93,7 @@
 
         #newEventIns {
             text-align: center;
-            margin: 40px 0 40px;
+            margin: 30px 0 40px;
         }
 
         #addEventForm {
@@ -146,6 +148,7 @@
             <li id="categories"><a href="/categories">Categories</a></li>
             {{#name}} {{{.}}} {{/name}}
             {{#link}} {{{.}}} {{/link}}
+            {{#link2}} {{{.}}} {{/link2}}
             {{#logout}} {{{.}}} {{/logout}}
 
         </ul>

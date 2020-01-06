@@ -21,7 +21,7 @@ import java.util.Map;
 public class CategoryController {
 
     @Autowired
-    UserService adminService;
+    UserService userService;
     @Autowired
     CategoryService categoryService;
     @Autowired
@@ -36,6 +36,7 @@ public class CategoryController {
             model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
 
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ORGANIZER"))) {
+                model.put("link2", "<li><a href=\"/myevents\" id=\"myEvents\">My events</a></li>");
                 model.put("link", "<li id=\"link\"><a href=\"/createevent\">Add new event</a></li>");
             }
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
@@ -67,7 +68,7 @@ public class CategoryController {
         List<String> errors = validation.getErrors();
 
         if (errors.size() == 0) {
-            Category category = new Category(name, adminService.getUserByLogin(auth.getName()));
+            Category category = new Category(name, userService .getUserByLogin(auth.getName()));
             categoryService.addCategory(category);
             modelAndView.setViewName("redirect:/admin");
             return modelAndView;
