@@ -35,24 +35,29 @@ public class EventController {
     @RequestMapping("/event/{id}")
     public ModelAndView getEvent(@PathVariable Integer id, Map<String, Object> model, Authentication authentication) {
         if(authentication != null) {
-            model.put("name", "<h3>Username: " + authentication.getName() + "</h3>");
-            model.put("logout", "<a href=\"/logout\">Logout</a>\n");
+            model.put("name", "<li><a href=\"#\">" + authentication.getName() + "</a></li>");
+            model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
 
             if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ORGANIZER"))) {
 
-                model.put("role", "<h3>Organizer page</h3>");
+                model.put("link", "<li id=\"link\"><a href=\"/createevent\">Add new event</a></li>");
                 if(organizerService.getUserByLogin(authentication.getName()).
                         equals(eventService.getEvent(id).getOrganizer()))
-                    model.put("createticket", "<a href=\"/createticket/"+id+"\">Add ticket</a>");
+                    model.put("createticket", "<a href=\"/createticket/"+id+"\" id=\"addticket\">Add ticket</a>");
             }
+            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+                model.put("link", "<li id=\"link\"><a href=\"/admin\">Admin page </a></li>");
+            }
+
             if(authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))){
+                model.put("link", "<li id=\"link\"><a href=\"/myorders\">My orders</a></li>");
                 model.put("userticket", "<label for=\"quantity\">Quantity</label>\n" +
                         "<input type=\"number\" id=\"quantity\" name=\"quantity\">" +
-                        "<button type=\"submit\">Buy ticket</button>\n");
+                        "<button type=\"submit\" id=\"buyticket\">Buy</button>\n");
             }
         }else{
-            model.put("login", "<a href=\"/login\">Login</a>\n");
-            model.put("registration", "<a href=\"/registration\">Registration</a>\n");
+            model.put("login", "<li id=\"login\"><a href=\"/login\">Login</a></li>");
+            model.put("registration", "<li id=\"registration\"><a href=\"/registration\">Registration</a></li>");
             model.put("userticket", "<p style=\"color: red\">Please login as User</p>");
         }
         model.put("event", eventService.getEvent(id));
@@ -68,8 +73,25 @@ public class EventController {
 //    }
 
     @RequestMapping("/place/{id}/events")
-    public ModelAndView getEventsByPlace(@PathVariable int id,  Map<String, Object> model) {
+    public ModelAndView getEventsByPlace(@PathVariable int id,  Map<String, Object> model,
+                                         Authentication authentication) {
+        if (authentication != null) {
+            model.put("name", "<li><a href=\"#\">" + authentication.getName() + "</a></li>");
+            model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
 
+            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ORGANIZER"))) {
+                model.put("link", "<li id=\"link\"><a href=\"/createevent\">Add new event</a></li>");
+            }
+            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+                model.put("link", "<li id=\"link\"><a href=\"/admin\">Admin page </a></li>");
+            }
+            if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER"))) {
+                model.put("link", "<li id=\"link\"><a href=\"/myorders\">My orders</a></li>");
+            }
+        } else {
+            model.put("login", "<li id=\"login\"><a href=\"/login\">Login</a></li>");
+            model.put("registration", "<li id=\"registration\"><a href=\"/registration\">Registration</a></li>");
+        }
         List<Event> events = eventService.getEventsByPlace(placeService.getPlaceById(id));
         model.put("place", placeService.getPlaceById(id).getName());
         model.put("events", events);

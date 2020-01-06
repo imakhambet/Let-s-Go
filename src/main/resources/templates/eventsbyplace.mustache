@@ -2,102 +2,181 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Hello World!</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            letter-spacing: 1px;
+
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        body, html {
+            font-family: 'Prompt', sans-serif;
+            color: rgb(47, 47, 48);
+        }
+
+        .container {
+            width: 100%;
+            background-color: #f6f6f6;
+        }
+
+        /** MENU **/
+        .menu {
+            left: 0;
+            overflow: auto;
+            position: fixed;
+            width: 175px;
+            height: 100%;
+            background-color: rgb(47, 47, 48);
+        }
+
+
+        .menuMenu {
+            width: 175px;
+            margin: 5px auto;
+        }
+
+        .menuMenu li {
+            width: 100%;
+            height: 60px;
+            text-align: center;
+        }
+
+        .menuMenu li a {
+            width: 100%;
+            line-height: 60px;
+            color: #f6f6f6;
+            font-size: 16px;
+        }
+
+        .menuMenu li a:hover {
+            color: cornflowerblue;
+        }
+
+        #logoA {
+            font-size: 25px;
+            font-weight: bold;
+            color: cornflowerblue;
+        }
+
+        .content {
+            position: absolute;
+            left: 175px;
+            width: calc(100% - 175px);
+        }
+
+        #eventsInPrg {
+            text-align: center;
+            margin-top: 45px;
+        }
+
+        #events {
+            display: flex;
+            flex-wrap: wrap;
+            width: 80%;
+            margin: 30px auto;
+            justify-content: center;
+        }
+
+        #event {
+            margin: 15px 15px;
+            border-radius: 7px 7px 7px 7px;
+            box-shadow: 0 14px 32px 0 rgba(0, 0, 0, 0.15);
+            padding: 20px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        #eventName {
+            font-size: 26px;
+            width: 100%;
+        }
+
+        #placeDate {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        #placeDate p {
+            font-size: 14px;
+            width: 100%;
+            text-transform: uppercase;
+            color: #8d8d8d;
+        }
+
+        #eventMore {
+            color: cornflowerblue;
+        }
+
+
+    </style>
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Lets go</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <p class="nav-item nav-link mt-3">{{#name}} {{{.}}} {{/name}}</p>
-            <p class="nav-item nav-link mt-3">{{#role}} {{{.}}} {{/role}}</p>
-            <p class="nav-item nav-link mt-3">{{#logout}} {{{.}}} {{/logout}}</p>
-            <p class="nav-item nav-link mt-3">{{#login}} {{{.}}} {{/login}} </p>
-            <p class="nav-item nav-link mt-3"> {{#registration}} {{{.}}} {{/registration}}</p>
-            <p class="nav-item nav-link mt-3"><a href="/places">Places</a></p>
-            <p class="nav-item nav-link mt-3">{{#link}} {{{.}}} {{/link}}</p>
+
+
+<div class="container">
+    <div class="menu">
+        <ul class="menuMenu">
+
+            <li id="logo"><a id="logoA" href="/">LET'S GO</a></li>
+            <li id="places"><a href="/places">Places</a></li>
+            <li id="categories"><a href="#">Categories</a></li>
+            {{#login}} {{{.}}} {{/login}}
+            {{#registration}} {{{.}}} {{/registration}}
+            {{#name}} {{{.}}} {{/name}}
+            {{#link}} {{{.}}} {{/link}}
+            {{#logout}} {{{.}}} {{/logout}}
+
+        </ul>
+    </div>
+
+    <div class="content">
+        <h2 id="eventsInPrg" style="">Events in {{#place}}{{{.}}}{{/place}}</h2>
+
+
+        <div id="events">
+            {{#events}}
+                <div id="event">
+
+                    <h2 id="eventName">{{name}}</h2>
+
+                    <div id="placeDate">
+                        <p> place: {{place.name}}</p>
+                        <p> date: {{date}}</p>
+                        <p> price from: ...</p>
+                    </div>
+                    <a href="/event/{{id}}" id="eventMore">MORE</a>
+                </div>
+            {{/events}}
         </div>
     </div>
-</nav>
-
-
-
-<h2 style="text-align: center;">Events in <span style="color: cornflowerblue">{{#place}}{{{.}}}{{/place}}</span></h2>
-
-
-<div class="container mt-5">
-
-    <div class="row">
-        {{#events}}
-            <div class="col-sm-6" style="height: 450px;
-                                       width: 200px;
-                                       margin: 50px auto;
-                                       border-radius: 7px 7px 7px 7px;
-                                       -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-                                       -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
-                                       box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);">
-                <div style="height: 300px;width: 327px;">
-                    <h1 style="margin: 0 0 0 38px;padding-top: 52px;font-size: 34px;color: #474747;font-family: 'Bentham', serif;">{{name}}</h1>
-                    <h2 style="margin: 0 0 47px 38px;
-                               font-size: 13px;
-                               font-family: 'Raleway', sans-serif;
-                               font-weight: 400;
-                               text-transform: uppercase;
-                               color: #d2d2d2;
-                               letter-spacing: 0.2em;">
-                        Place: {{place.name}}</h2>
-                    <h2 style="margin: 0 0 47px 38px;
-                               font-size: 13px;
-                               font-family: 'Raleway', sans-serif;
-                               font-weight: 400;
-                               text-transform: uppercase;
-                               color: #d2d2d2;
-                               letter-spacing: 0.2em;">
-                        Date: {{date}}</h2>
-                    <p style="height: 125px;
-  margin: 0 0 0 38px;
-  font-family: 'Playfair Display', serif;
-  color: #8d8d8d;
-  line-height: 1.7em;
-  font-size: 15px;
-  font-weight: lighter;
-  overflow: hidden;">Description: {{description}}</p>
-                    <div style="height: 103px;
-  width: 327px;
-  margin-top: 17px;
-  position: relative;">
-                        <button style="float: right;
-  display: inline-block;
-  height: 50px;
-  width: 176px;
-  margin: 0 40px 0 16px;
-  box-sizing: border-box;
-  border: transparent;
-  border-radius: 60px;
-  font-family: 'Raleway', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: #ffffff;
-  background-color: #9cebd5;
-  cursor: pointer;
-  outline: none;"><a href="//event/{{id}}">Event</a></button>
-                    </div>
-                </div>
-            </div>
-        {{/events}}
-    </div>
-
 </div>
-
-
 </body>
 </html>

@@ -21,9 +21,8 @@ public class CourseApiApp {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addResourceHandlers(ResourceHandlerRegistry registry) {
-                registry.addResourceHandler("/static/**")
-                        .addResourceLocations("classpath:/static/")
-                        .addResourceLocations("file://");
+                registry.addResourceHandler("/css/**")
+                        .addResourceLocations("/resources/static/css/")
                 ;
             }
         };

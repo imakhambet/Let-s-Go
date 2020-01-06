@@ -7,6 +7,7 @@ import cz.macha.spring.service.OrderService;
 import cz.macha.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,10 +32,13 @@ public class OrderController {
     }
 
     @RequestMapping("/myorders")
-    public ModelAndView getOrdersByCustomer(Authentication authentication, Map<String, Object> model){
+    public ModelAndView getOrdersByCustomer(Authentication authentication, Map<String, Object> model) {
+        model.put("name", "<li><a href=\"#\">" + authentication.getName() + "</a></li>");
+        model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
+
+        model.put("link", "<li id=\"link\"><a href=\"/myorders\">My orders</a></li>");
         List<Order> orders =
                 orderService.getOrdersByCustomerOrderByIdDesc(customerService.getUserByLogin(authentication.getName()));
-        model.put("name", "<h3>Username: " + authentication.getName() + "</h3>");
         model.put("orders", orders);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("user/orders");
@@ -43,12 +47,12 @@ public class OrderController {
 
     @PostMapping("/buyticket/{ticket}")
     public ModelAndView addOrder(@RequestParam Integer quantity,
-                                 @PathVariable Integer ticket, Authentication auth){
+                                 @PathVariable Integer ticket, Authentication auth) {
         Order order = new Order();
         order.setCustomer(customerService.getUserByLogin(auth.getName()));
         order.setEventTicket(eventTicketService.getEventTicketById(ticket));
         order.setQuantity(quantity);
-        order.setTotalPrice(quantity*eventTicketService.getEventTicketById(ticket).getPrice());
+        order.setTotalPrice(quantity * eventTicketService.getEventTicketById(ticket).getPrice());
         orderService.addOrders(order);
 
         ModelAndView modelAndView = new ModelAndView();
@@ -57,7 +61,7 @@ public class OrderController {
     }
 
     @RequestMapping("/orders/{oid}")
-    public void deleteOrder(@PathVariable Integer oid){
+    public void deleteOrder(@PathVariable Integer oid) {
         orderService.deleteOrders(oid);
     }
 

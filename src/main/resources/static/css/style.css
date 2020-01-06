@@ -15,9 +15,12 @@ ul, li {
 body, html{
     font-family: 'Prompt', sans-serif;
     color: rgb(47,47,48);
+    background-color: yellow;
 }
 
 
 /** HEADER **/
-header{
+h1{
+    color: lightgray;
+    border: 2px solid black;
 }

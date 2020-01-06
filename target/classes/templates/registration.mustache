@@ -2,117 +2,164 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Spring Security Example </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
 
-    <style type="text/css">
-        .container{
-            margin-right: auto;
-            margin-left: auto;
-            padding-right: 15px;
-            padding-left: 15px;
-            width: 100%;
-            box-sizing: inherit;
-            display: block;
-            text-align: center;
-        }
-        body {
-            padding-top: 40px;
-            padding-bottom: 40px;
-            background-color: #eee;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            color: #212529;
-            display: block;
-        }
-
-        *, ::after, ::before {
-            box-sizing: inherit;
-        }
-        h2 {
-            margin-bottom: 10px;
-            font-size: 2rem;
-            font-family: inherit;
-            font-weight: 500;
-            line-height: 1.1;
-            color: inherit;
-            margin-top: 0;
-            box-sizing: inherit;
-            display: block;
-            margin-block-start: 0.83em;
-            margin-block-end: 0.83em;
-            margin-inline-start: 0px;
-            margin-inline-end: 0px;
-        }
-        .form-signin{
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
-            box-sizing: inherit;
-            display: block;
-        }
-        input{
-            padding: .5rem .75rem;
-            font-size: 1rem;
-            line-height: 1.25;
-            color: #495057;
-            background-color: #fff;
-            background-image: none;
-            background-clip: padding-box;/*tut*/
-            border: 1px solid rgba(0,0,0,.15);
-            border-radius: .25rem;
-            transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-            position: relative;
+    <style>
+        * {
             box-sizing: border-box;
-            height: auto;
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        form .temp {
-            width: 100%;
-        }
-        .btn{
-            display: block;
-            width: 100%;
-            padding: .5rem 1rem;
-            font-size: 1.25rem;
-            line-height: 1.5;
-            border-radius: .3rem;
-            color: #fff;
-            background-color: #007bff;
-            border-color: #007bff;
-            font-weight: 400;
-            text-align: center;
-            white-space: nowrap;
-            vertical-align: middle;
-            user-select: none;
-            border: 1px solid transparent;
-            text-transform:none;
-            overflow: visible;
             margin: 0;
-            font-family: inherit;
+            padding: 0;
+            letter-spacing: 1px;
+
         }
 
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        ul, li {
+            list-style: none;
+        }
+
+        body, html {
+            font-family: 'Prompt', sans-serif;
+            color: rgb(47, 47, 48);
+        }
+
+        .container {
+            width: 100%;
+            background-color: #f6f6f6;
+        }
+
+        /** MENU **/
+        .menu {
+            left: 0;
+            overflow: auto;
+            position: fixed;
+            width: 175px;
+            height: 100%;
+            background-color: rgb(47, 47, 48);
+        }
+
+
+        .menuMenu {
+            width: 175px;
+            margin: 5px auto;
+        }
+
+        .menuMenu li {
+            width: 100%;
+            height: 60px;
+            text-align: center;
+        }
+
+        .menuMenu li a {
+            width: 100%;
+            line-height: 60px;
+            color: #f6f6f6;
+            font-size: 16px;
+        }
+
+        .menuMenu li a:hover {
+            color: cornflowerblue;
+        }
+
+        .content {
+            position: absolute;
+            left: 175px;
+            width: calc(100% - 175px);
+        }
+
+        #regIns {
+            text-align: center;
+            margin: 40px 0 40px;
+        }
+
+        #regForm {
+            display: block;
+        }
+
+        #inputs label, #inputs input {
+            display: block;
+            margin: 0 auto;
+        }
+
+        #regForm label {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #radiosReg{
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        #radiosReg label{
+            display: block;
+        }
+
+        #signin {
+            background-color: cornflowerblue;
+            padding: 5px;
+            display: block;
+            width: 140px;
+            height: 45px;
+            margin: 25px auto 0;
+        }
     </style>
+
 </head>
 <body>
 <div class="container">
-    <h2>Add new user</h2>
-    {{#message}}
-        {{message}}
-    {{/message}}
-    <form action="/registration" method="post" class="form-signin">
-        <div><input class="temp" type="text" name="username" placeholder="Username" required/></div>
-        <div><input class="temp" type="text" name="email" placeholder="Email" required/></div>
-        <div><input class="temp" type="password" name="password" placeholder="Password" required/></div>
-        <p><input name="role" type="radio" value="ROLE_ORGANIZER" required> Organizer</p>
-        <p><input name="role" type="radio" value="ROLE_USER"> User</p>
+    <div class="menu">
+        <ul class="menuMenu">
 
+            <li id="logo"><a id="logoA" href="/">LET'S GO</a></li>
+            <li id="places"><a href="/places">Places</a></li>
+            <li id="categories"><a href="#">Categories</a></li>
+            {{#login}} {{{.}}} {{/login}}
+            {{#registration}} {{{.}}} {{/registration}}
+            {{#name}} {{{.}}} {{/name}}
+            {{#link}} {{{.}}} {{/link}}
+            {{#logout}} {{{.}}} {{/logout}}
+
+        </ul>
+    </div>
+
+    <div class="content">
+        <h2 id="regIns">New user registration</h2>
+
+        <form action="/registration" method="post" id="regForm">
+        {{#errors}}
+            {{{.}}}
+        {{/errors}}
+        <div id="inputs">
+            <label> Username<input type="text" name="username"/> </label>
+            <label> Email <input type="text" name="email"/> </label>
+            <label> Password <input type="password" name="password"/> </label>
+        </div>
+        <div id="radiosReg">
+            <label><input name="role" type="radio" value="ROLE_USER" checked> User</label>
+            <label><input name="role" type="radio" value="ROLE_ORGANIZER"> Organizer</label>
+        </div>
         <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-        <div><input  class="btn" type="submit" value="Sign In"/></div>
-    </form>
+        <input type="submit" value="Sign in" id="signin"/>
+        </form>
+    </div>
 </div>
 </body>
 </html>
