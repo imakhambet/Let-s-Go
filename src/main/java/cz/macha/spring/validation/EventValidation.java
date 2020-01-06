@@ -56,7 +56,7 @@ public class EventValidation {
     }
 
     private void place(String place){
-        if(place.isEmpty()){
+        if(place.equals("Select place")){
             errors.add("Event place is required");
         } else if(placeService.getPlaceByName(place) == null){
             errors.add("place doesnt exist");

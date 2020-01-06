@@ -2,6 +2,7 @@ package cz.macha.spring.rest;
 
 import cz.macha.spring.model.User;
 import cz.macha.spring.service.EventService;
+import cz.macha.spring.service.PlaceService;
 import cz.macha.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,8 @@ public class MainController {
     EventService eventService;
     @Autowired
     UserService userService;
+    @Autowired
+    PlaceService placeService;
 
     @RequestMapping("/")
     public String home(Map<String, Object> model, Authentication authentication) {
@@ -51,6 +54,8 @@ public class MainController {
 
         model.put("link", "<li id=\"link\"><a href=\"/createevent\">Add new event</a></li>");
         model.put("link2", "<li><a href=\"/myevents\" id=\"myEvents\">My events</a></li>");
+
+        model.put("places", placeService.getAllPlaces());
         return "organizer/createevent";
     }
 
