@@ -7,6 +7,7 @@ import cz.macha.spring.service.EventService;
 import cz.macha.spring.service.EventTicketService;
 import cz.macha.spring.validation.TicketValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +27,7 @@ public class EventTicketController {
         return eventTicketService.getEventTicketsByEvent(eventService.getEvent(id));
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGANIZER')")
     @PostMapping("/event/{id}/addticket")
     public ModelAndView addEventTicket(@RequestParam String name,
                                        @RequestParam String price,

@@ -7,6 +7,7 @@ import cz.macha.spring.service.EventTicketService;
 import cz.macha.spring.service.OrderService;
 import cz.macha.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class OrderController {
         return orderService.getAllOrders();
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @RequestMapping("/myorders")
     public ModelAndView getOrdersByCustomer(Authentication authentication, Map<String, Object> model) {
         model.put("name", "<li><a href=\"#\" id=\"authName\">" + authentication.getName() + "</a></li>");
@@ -46,6 +48,7 @@ public class OrderController {
         return modelAndView;
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/buyticket/{ticket}")
     public ModelAndView addOrder(@RequestParam Integer quantity,
                                  @PathVariable Integer ticket, Authentication auth, Map<String, Object> model) {

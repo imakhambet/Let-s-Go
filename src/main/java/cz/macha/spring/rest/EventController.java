@@ -7,6 +7,7 @@ import cz.macha.spring.service.EventService;
 import cz.macha.spring.service.PlaceService;
 import cz.macha.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,7 @@ public class EventController {
     @Autowired
     private EventService eventService;
 
+    @PreAuthorize("hasRole('ROLE_ORGANIZER')")
     @RequestMapping("/myevents")
     public ModelAndView getEventsByOrganizer(Map<String, Object> model,
                                          Authentication authentication) {
@@ -175,6 +177,7 @@ public class EventController {
         eventService.updateEvent(id, event);
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGANIZER')")
     @RequestMapping(value = "/deleteevent/{id}")
     public ModelAndView deleteEvent(@PathVariable Integer id) {
         eventService.deleteEvent(id);

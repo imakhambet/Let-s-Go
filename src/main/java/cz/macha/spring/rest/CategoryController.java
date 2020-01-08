@@ -9,6 +9,7 @@ import cz.macha.spring.service.UserService;
 import cz.macha.spring.validation.AddCategoryValidation;
 import cz.macha.spring.validation.CategoryValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
@@ -56,7 +57,7 @@ public class CategoryController {
 
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addcategory")
     public ModelAndView addCategory(@RequestParam String name,
                                     Authentication auth, Map<String, Object> model) {
@@ -93,6 +94,7 @@ public class CategoryController {
         categoryService.deleteCategory(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGANIZER')")
     @PostMapping( "/addcategoryev/{eventid}")
     public ModelAndView addEventToCategory(@PathVariable int eventid, @RequestParam String name,
                                            Map<String, Object> model) {

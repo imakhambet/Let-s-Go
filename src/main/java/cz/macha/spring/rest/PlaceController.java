@@ -6,6 +6,7 @@ import cz.macha.spring.service.PlaceService;
 import cz.macha.spring.service.UserService;
 import cz.macha.spring.validation.PlaceValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
@@ -54,6 +55,7 @@ public class PlaceController {
         return placeService.getPlaceByName(name);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addplace")
     public ModelAndView addPlace(@RequestParam String name,
                                  @RequestParam String address,

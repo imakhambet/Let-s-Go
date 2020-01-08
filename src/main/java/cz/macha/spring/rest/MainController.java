@@ -5,6 +5,7 @@ import cz.macha.spring.service.EventService;
 import cz.macha.spring.service.PlaceService;
 import cz.macha.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
@@ -47,6 +48,7 @@ public class MainController {
         return "index";
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGANIZER')")
     @RequestMapping("/createevent")
     public String addEvent(Map<String, Object> model, Authentication authentication) {
         model.put("name", "<li><a href=\"#\" id=\"authName\">" + authentication.getName() + "</a></li>");
@@ -59,6 +61,7 @@ public class MainController {
         return "organizer/createevent";
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGANIZER')")
     @RequestMapping("/createticket/{id}")
     public String addTicket(Map<String, Object> model, Authentication authentication, @PathVariable Integer id) {
         model.put("name", "<li><a href=\"#\" id=\"authName\">" + authentication.getName() + "</a></li>");
@@ -70,6 +73,7 @@ public class MainController {
         return "organizer/createticket";
     }
 
+    @PreAuthorize("hasRole('ROLE_ORGANIZER')")
     @RequestMapping("/addcategory/{id}")
     public String addCategoryEv(Map<String, Object> model, Authentication authentication, @PathVariable Integer id) {
         model.put("name", "<li><a href=\"#\" id=\"authName\">" + authentication.getName() + "</a></li>");
@@ -92,6 +96,7 @@ public class MainController {
         return "admin/admin";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping("/createcategory")
     public String addCategory(Map<String, Object> model, Authentication auth) {
 
@@ -102,6 +107,7 @@ public class MainController {
         return "admin/createcategory";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping("/createplace")
     public String addPlace(Map<String, Object> model, Authentication auth) {
 

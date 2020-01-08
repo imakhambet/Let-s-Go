@@ -6,6 +6,7 @@ import cz.macha.spring.service.UserService;
 import cz.macha.spring.validation.EventValidation;
 import cz.macha.spring.validation.RegValidation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -86,7 +87,7 @@ public class UserController {
         userService.addAnswer(oId, qId, answer);
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ORGANIZER')")
     @PostMapping("/addevent")
     public ModelAndView createEvent(@RequestParam String name,
                                     @RequestParam String description,
