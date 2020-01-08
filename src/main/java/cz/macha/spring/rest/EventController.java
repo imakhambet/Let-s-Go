@@ -71,7 +71,7 @@ public class EventController {
                 if(organizerService.getUserByLogin(authentication.getName()).
                         equals(eventService.getEvent(id).getOrganizer())) {
                     model.put("createticket", "<a href=\"/createticket/" + id + "\" id=\"addticket\">Add ticket</a>");
-                    model.put("addCtgr", "<span id=\"addCatLink\"><a href=\"/addcategory/" + id + "\" id=\"addCtgr\">Add category</a></span>");
+                    model.put("addCtgr", "<span id=\"addCatLink\"><a href=\"/editcategoryEv/" + id + "\" id=\"addCtgr\">Edit</a></span>");
                 }
             }
             if (authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {

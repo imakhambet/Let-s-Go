@@ -1,6 +1,7 @@
 package cz.macha.spring.rest;
 
-import cz.macha.spring.model.User;
+import cz.macha.spring.model.Category;
+import cz.macha.spring.service.CategoryService;
 import cz.macha.spring.service.EventService;
 import cz.macha.spring.service.PlaceService;
 import cz.macha.spring.service.UserService;
@@ -22,6 +23,8 @@ public class MainController {
     UserService userService;
     @Autowired
     PlaceService placeService;
+    @Autowired
+    CategoryService categoryService;
 
     @RequestMapping("/")
     public String home(Map<String, Object> model, Authentication authentication) {
@@ -74,7 +77,7 @@ public class MainController {
     }
 
     @PreAuthorize("hasRole('ROLE_ORGANIZER')")
-    @RequestMapping("/addcategory/{id}")
+    @RequestMapping("/editcategoryEv/{id}")
     public String addCategoryEv(Map<String, Object> model, Authentication authentication, @PathVariable Integer id) {
         model.put("name", "<li><a href=\"#\" id=\"authName\">" + authentication.getName() + "</a></li>");
         model.put("logout", "<li id=\"logout\"><a href=\"/logout\">Logout</a></li>");
@@ -82,8 +85,10 @@ public class MainController {
         model.put("link", "<li id=\"link\"><a href=\"/createevent\">Add new event</a></li>");
         model.put("link2", "<li><a href=\"/myevents\" id=\"myEvents\">My events</a></li>");
 
+        model.put("category", eventService.getEvent(id).getCategory());
+        model.put("categories", categoryService.getAllCategories());
         model.put("id", id);
-        return "organizer/addcategory";
+        return "organizer/editcategory";
     }
 
     @RequestMapping("/admin")

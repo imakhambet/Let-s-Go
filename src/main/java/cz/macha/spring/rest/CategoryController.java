@@ -2,7 +2,6 @@ package cz.macha.spring.rest;
 
 import cz.macha.spring.model.Category;
 import cz.macha.spring.model.Event;
-import cz.macha.spring.model.Place;
 import cz.macha.spring.service.CategoryService;
 import cz.macha.spring.service.EventService;
 import cz.macha.spring.service.UserService;
@@ -69,7 +68,7 @@ public class CategoryController {
         List<String> errors = validation.getErrors();
 
         if (errors.size() == 0) {
-            Category category = new Category(name, userService .getUserByLogin(auth.getName()));
+            Category category = new Category(name, userService.getUserByLogin(auth.getName()));
             categoryService.addCategory(category);
             modelAndView.setViewName("redirect:/admin");
             return modelAndView;
@@ -95,7 +94,7 @@ public class CategoryController {
     }
 
     @PreAuthorize("hasRole('ROLE_ORGANIZER')")
-    @PostMapping( "/addcategoryev/{eventid}")
+    @PostMapping("/editcategory/{eventid}")
     public ModelAndView addEventToCategory(@PathVariable int eventid, @RequestParam String name,
                                            Map<String, Object> model) {
         ModelAndView modelAndView = new ModelAndView();
@@ -103,7 +102,12 @@ public class CategoryController {
         validation.validation(name, eventid);
         List<String> errors = validation.getErrors();
 
-        if (errors.size() == 0){
+        if (errors.size() == 0) {
+            if (eventService.getEvent(eventid).getCategory().contains(categoryService.getCategoryByName(name))) {
+                modelAndView.setViewName("redirect:/delcat/"+
+                        categoryService.getCategoryByName(name).getId() +"/event/" + eventid);
+                return modelAndView;
+            }
             Event event = eventService.getEvent(eventid);
             Category category = categoryService.getCategoryByName(name);
             categoryService.addEvent(category, event);
@@ -116,15 +120,18 @@ public class CategoryController {
             errorsS.append("<p class=\"error\">").append(error).append("</p>");
         }
         model.put("errors", errorsS.toString());
-        modelAndView.setViewName("organizer/addcategory");
+        modelAndView.setViewName("organizer/editcategory");
         return modelAndView;
     }
 
-    @DeleteMapping(value = "/categories/{cid}/events/{id}")
-    public void removeProductFromCategory(@PathVariable int cid,
+    @RequestMapping(value = "/delcat/{cid}/event/{id}")
+    public ModelAndView removeProductFromCategory(@PathVariable int cid,
                                           @PathVariable Integer id) {
+        ModelAndView modelAndView = new ModelAndView();
         final Category category = categoryService.getCategory(cid);
         final Event toRemove = eventService.getEvent(id);
         categoryService.removeEvent(category, toRemove);
+        modelAndView.setViewName("redirect:/event/" + id);
+        return modelAndView;
     }
 }

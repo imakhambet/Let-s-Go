@@ -28,15 +28,12 @@ public class AddCategoryValidation {
     }
 
     private void add(String name, int id){
-        if (eventService.getEvent(id).getCategory().contains(categoryService.getCategoryByName(name))){
-            errors.add("CATEGORY IS ALREADY ADDED");
-        }
-        else if(categoryService.getCategoryByName(name) == null){
+        if (name.equals("Select category")){
+            errors.add("CATEGORY NAME IS REQUIRED");
+        }else if(categoryService.getCategoryByName(name) == null){
             errors.add("CATEGORY IS NOT EXIST");
         }
-        else if (name.isEmpty()){
-            errors.add("CATEGORY NAME IS REQUIRED");
-        }
+
     }
 
     public List<String> getErrors() {

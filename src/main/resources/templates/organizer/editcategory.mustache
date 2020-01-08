@@ -95,11 +95,22 @@
             margin: 30px 0 40px;
         }
 
+        #addedCats{
+            text-align: center;
+        }
+
+        #toDelete{
+            text-align: center;
+            color: cornflowerblue;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
         #addCategoryEvForm {
             display: block;
         }
 
-        #addCategoryEvForm label, #addCategoryEvForm input {
+        #addCategoryEvForm label, #addCategoryEvForm select {
             display: block;
             margin: 0 auto;
         }
@@ -151,16 +162,27 @@
     <div class="content">
         <h2 id="addCategoryEvIns">Add category for event</h2>
 
-        <form method="post" class="addCategoryEv" id="addCategoryEvForm" style="display: block" action="/addcategoryev/{{#id}}{{.}}{{/id}}">
+        <p id="toDelete">To delete, enter a category that has already been added</p>
+        <form method="post" class="addCategoryEv" id="addCategoryEvForm" style="display: block" action="/editcategory/{{#id}}{{.}}{{/id}}">
             {{#errors}}
                 {{{.}}}
             {{/errors}}
 
+            <div id="addedCats">
+                <p>Added categories</p>
+                {{#category}}<span>{{name}}
+            </span>
+            {{/category}}
+            </div>
+
             <label for="categoryName">Category</label>
-            <input type="text" name="name" id="categoryName">
+            <select name="name" id="categoryName">
+                <option>Select category</option>
+                {{#categories}}<option>{{name}}</option>{{/categories}}
+            </select>
 
             <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
-            <button type="submit" id="addCategoryEvButton">Add</button>
+            <button type="submit" id="addCategoryEvButton">Edit</button>
         </form>
     </div>
 </div>

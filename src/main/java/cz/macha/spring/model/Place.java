@@ -33,6 +33,7 @@ public class Place {
     @JoinColumn(name = "creator_id")
     private User creator;
 
+
     @OneToMany(mappedBy = "place", cascade = {
             CascadeType.PERSIST
     })
